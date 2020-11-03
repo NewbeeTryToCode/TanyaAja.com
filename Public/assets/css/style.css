@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 *,
 *::before,
 *::after {
@@ -9,10 +10,11 @@ body {
     padding: 0;
     font-family: Roboto, Arial;
     min-height: 100vh;
+    color: #263238;
 }
 
 .container {
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
     flex-grow: 1;
@@ -48,24 +50,105 @@ body {
 }
 
 .main-nav a:hover {
-    color: #ed93fd;
+    color: #e06bf5;
 }
 
 .main {
     overflow: hidden;
     border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
 }
 
 .main-section {
-    margin-top: 4rem;
+    margin: 4rem auto;
     display: table;
-    width: 100%;
+    width: 80%;
     box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
 }
 
 .tittle {
     font-size: 2.5rem;
+}
+
+.main-section .img-wrapper {
+    display: table-cell;
+    height: auto;
+    background: url("../img/Login.svg") center left/contain no-repeat;
+    width: 60%;
+}
+
+.main-section .main-form {
+    display: table-cell;
+    margin: 1em;
+    padding: 4rem 3rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin: .75rem 0;
+}
+
+.btn {
+    margin-top: 1.5rem;
+}
+
+.btn .btn-login {
+    background-color: #BA68C8;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn .btn-login:hover {
+    background-color: #e06bf5;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: .75rem;
+}
+
+.input-group input,
+.btn-login {
+    border-radius: 7px;
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.input-group input {
+    outline: none;
+    color: inherit;
+    border: 1px solid #BA68C8;
+    background: #ffffff;
+}
+
+.input-group input:focus,
+.input-group input:hover,
+.btn:focus,
+.btn:hover {
+    border-color: #e06bf5;
+}
+
+.form-footer {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.form-footer .link {
+    color: #BA68C8;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-footer .link:hover {
+    color: #e06bf5;
+}
+
+@media(max-width:900px) {
+    .main-section .img-wrapper {
+        display: none;
+    }
 }
