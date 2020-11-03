@@ -1,0 +1,71 @@
+.main-section .img-wrapper {
+    display: table-cell;
+    background: url("/Public/assets/img/register.svg") center left/contain no-repeat;
+    width: 60%;
+    height: auto;
+}
+
+.graphic1 {
+    position: absolute;
+    background: url("../img/signup-grpahic1svg.svg") right /contain no-repeat;
+    width: 20.75rem;
+    height: 26rem;
+    z-index: 0;
+    left: 0;
+    bottom: -200px;
+}
+
+.graphic2 {
+    position: absolute;
+    background: url("../img/signup-graphic-2.svg") center left /contain no-repeat;
+    width: 22rem;
+    height: 34rem;
+    z-index: 0;
+    right: -100px;
+    bottom: -100px;
+}
+
+.dash {
+    position: absolute;
+    background: url("../img/dash.png") center right/contain no-repeat;
+    width: 10rem;
+    height: 14rem;
+    z-index: 1;
+    right: 100px;
+    top: 80px;
+}
+
+.rounded-dash {
+    position: absolute;
+    background: url("../img/Vector.svg") center right/contain no-repeat;
+    width: 8rem;
+    height: 8rem;
+    right: 120px;
+    top: 150px;
+}
+
+.x1 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: 30px;
+}
+
+.x2 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: -110px;
+    left: 120px;
+}
+
+.x3 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: -80px;
+    left: 10px;
+}
