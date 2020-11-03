@@ -1,0 +1,109 @@
+.judul{
+    color: #2E66DB;
+}
+
+body{
+    background-color: #F0F0F3;
+}
+
+
+a,
+a:hover,
+a:focus{
+    color:inherit;
+    text-decoration: none;
+    transition: all 0.3;
+}
+
+
+#sidebar.active{
+    margin-left: -280px;
+}
+
+
+.wrapper{
+    display: flex;
+    text-decoration: none;
+    transition: all 0.3;
+}
+
+#sidebar{
+    min-width: 280px;
+    max-width: 280px;
+    background: #F0F0F3;
+    color: #3C61AF;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header{
+    padding: 10px;
+}
+
+#sidebar ul li a{
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover{
+    font-weight: bold;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"]{
+    color: #3C61AF;
+}
+
+a[data-toggle="collapse"]{
+    position: relative;
+}
+
+.dropdown-toggle::after{
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translateY(-50%);
+}
+
+ul ul a{
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+}
+
+
+#content{
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -280px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+/* my css */
+
+.abu{
+    background-color: #F0F0F3 ;
+}
+
+.avatarImg{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+}
+
+.biru{
+    color: #5877E3
+    ;
+}
