@@ -123,11 +123,18 @@
 
     <script>
 
-        $(document).ready(function(){
-            $("#sidebarCollapse").on('click', function(){
-                $("#sidebar").toggleClass('active');
-            });
-        });
+        // $(document).ready(function(){
+        //     $("#sidebarCollapse").on('click', function(){
+        //         $("#sidebar").toggleClass('active');
+        //     });
+        // });
+
+        const toggle = document.getElementById('sidebarCollapse');
+        const sidebar = document.getElementById('sidebar');
+        toggle.addEventListener('click', function(e){
+            e.preventDefault();
+            sidebar.classList.toggle('active');
+        })
 
     </script>
   </body>
