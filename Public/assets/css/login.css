@@ -1,0 +1,92 @@
+.graphic1 {
+    position: absolute;
+    background: url("../img/login-graph1.svg") center left /contain no-repeat;
+    width: 30rem;
+    height: 34rem;
+    z-index: 0;
+    right: -100px;
+    bottom: 20px;
+}
+
+.graphic2 {
+    position: absolute;
+    background: url("../img/login-graph1.svg") center left /contain no-repeat;
+    width: 25rem;
+    height: 30rem;
+    z-index: 0;
+    left: -100px;
+    transform: rotate(-99.86deg);
+    bottom: -120px;
+}
+
+.dash {
+    position: absolute;
+    background: url("../img/dash.png") center right/contain no-repeat;
+    width: 10rem;
+    height: 14rem;
+    z-index: 1;
+    left: 120px;
+    top: 300px;
+}
+
+.rounded-dash {
+    position: absolute;
+    background: url("../img/Vector.svg") center right/contain no-repeat;
+    width: 8rem;
+    height: 8rem;
+    left: 150px;
+    top: 350px;
+}
+
+.x1 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: 80px;
+}
+
+.x2 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: 100px;
+    left: 120px;
+}
+
+.x3 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: 20px;
+    left: 10px;
+}
+
+.x3 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: 20px;
+    left: 10px;
+}
+
+.x4 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: 180px;
+    right: 120px;
+}
+
+.x5 {
+    position: absolute;
+    background: url("../img/X.svg") bottom left /contain no-repeat;
+    width: 1rem;
+    height: 1rem;
+    bottom: 300px;
+    right: 70px;
+}

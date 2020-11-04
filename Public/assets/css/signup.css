@@ -1,8 +1,8 @@
 .main-section .img-wrapper {
     display: table-cell;
+    height: auto;
     background: url("/Public/assets/img/register.svg") center left/contain no-repeat;
     width: 60%;
-    height: auto;
 }
 
 .graphic1 {
@@ -68,4 +68,10 @@
     height: 1rem;
     bottom: -80px;
     left: 10px;
+}
+
+@media(max-width:900px) {
+    .main-section .img-wrapper {
+        display: none;
+    }
 }
