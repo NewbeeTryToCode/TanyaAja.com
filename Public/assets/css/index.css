@@ -90,6 +90,7 @@
 }
 
 .card-landing .card-main-content .card {
+    width: 400px;
     display: flex;
     flex-direction: column;
     border: 1px solid black;
@@ -107,18 +108,19 @@
 
 .card-landing .card-main-content .card .card-footer .avatar-identitas {
     border: 2px solid yellow;
-    display: inline-flex;
-    flex-wrap: wrap;
+    display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .card-landing .card-main-content .card .card-footer .avatar-identitas h4 {
     border: 1px solid green;
+    margin:0;
 }
 
 .card-landing .card-main-content .card .card-footer .avatar-identitas p {
     border: 1px solid black;
+    margin: 0;
 }
 
 @media(max-width: 768px) {
