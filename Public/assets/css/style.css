@@ -92,7 +92,7 @@ body {
 
 .btn .btn-login,
 .btn.btn-primary {
-    background-color: #BA68C8;
+    background: linear-gradient(90.03deg, rgba(186, 104, 200, 0.85) 1.89%, rgba(0, 169, 157, 0.85) 100%);
     font-weight: bold;
     color: #ffffff;
     border: none;

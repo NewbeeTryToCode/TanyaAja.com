@@ -30,20 +30,21 @@
     margin-bottom: 2rem;
 }
 
-.about-landing {
+.about-landing,
+.card-landing {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.about-landing .center-tittle {
+.center-tittle {
     text-align: center;
 }
 
-.about-landing .tittle-underline {
+.tittle-underline {
     position: relative;
     float: right;
-    right: -340px;
+    right: 0px;
     width: 450px;
     height: 10px;
     border-radius: 30px;
@@ -81,15 +82,73 @@
 }
 
 .about-landing .about-main-content .icon-section .icon-deskripsi .tittle {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .about-landing .about-main-content .icon-section .icon-deskripsi .subtittle {
     font-size: 1rem;
 }
 
+.card-landing .card-main-content .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.card-landing .card-main-content .card .card-footer {
+    display: flex;
+    border: 1px solid black;
+}
+
+.card-landing .card-main-content .card .card-footer img {
+    max-width: 50px;
+    height: auto;
+}
+
+.card-landing .card-main-content .card .card-footer .avatar-identitas {
+    border: 2px solid yellow;
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-landing .card-main-content .card .card-footer .avatar-identitas h4 {
+    border: 1px solid green;
+}
+
+.card-landing .card-main-content .card .card-footer .avatar-identitas p {
+    border: 1px solid black;
+}
+
 @media(max-width: 768px) {
-    .about-landing .tittle-underline {
-        right: 20px;
+    .main-landing .img-wrapper {
+        display: none;
+    }
+    .main-landing .img-wrapper,
+    .main-landing .call-to-action {
+        width: 100%;
+        margin: 0;
+    }
+    .tittle-underline {
+        width: 400px;
+    }
+    .about-landing .about-main-content .icon-section img {
+        width: 30vw;
+        height: 30vw;
+        margin-top: 10px;
+    }
+    .about-landing .about-main-content .side-wrap {
+        display: flex;
+        gap: 30px;
+        flex-direction: column;
+    }
+}
+
+@media(min-width: 769px) and ( max-width: 900px) {
+    .about-landing .about-main-content .icon-section img {
+        width: 20vw;
+        height: 20vw;
+        margin-top: 10px;
     }
 }
