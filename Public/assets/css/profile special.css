@@ -1,0 +1,90 @@
+.avatar{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 365px;
+    top: 50px;
+    border-radius: 100px;
+}
+
+.parrent{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.background{
+    position: relative;
+    top: 0;
+    left: 0;
+    
+    width: 860px;
+}
+
+.bawahback{
+    color: #194B4F;
+   
+    font-style: normal;
+    /* identical to box height, or 18px */
+    letter-spacing: 0.02em;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    margin-left: 236px;
+}
+
+.barsatu{
+    position: relative;  
+    display: flex;
+    flex-direction: row;
+}
+.circlecheck{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 40px;
+    height: 40px;
+    padding-left: 68px;
+}
+
+.bardua{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 24px;
+    height: 18px;
+    padding-left: 66px;
+}
+
+.abu{
+    background-color: #F0F0F3 ;
+}
+
+
+.fontbio{
+    padding-top: 20px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    /* identical to box height, or 18px */
+
+    letter-spacing: 0.02em;
+
+    color: #8F9FAE;
+}
+
+.fonttitle{
+    
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.02em;
+
+    color: #000000;
+}
+
+
