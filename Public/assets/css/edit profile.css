@@ -1,0 +1,23 @@
+.edit{
+    width: 35%;
+}
+.tombol{
+    background-color:  #F0F0F3;
+    float: right;
+    color: #687078;
+}
+.ijo{
+    color: green;
+}
+
+.fontform{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.02em;
+
+    color: #000000;
+}
