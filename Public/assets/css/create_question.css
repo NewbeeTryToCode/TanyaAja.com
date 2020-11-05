@@ -1,0 +1,42 @@
+.fontquest{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.02em;
+    color: #8F9FAE;
+}
+
+.center{
+    text-align: center;
+}
+
+.box{
+    width: 45%;
+}
+
+.tombol{
+    background-color:  #F0F0F3;
+    float: right;
+    color: #687078;
+}
+
+.subdes{
+    position: absolute;
+width: 195px;
+height: 24px;
+left: 421px;
+top: 146px;
+
+font-family: Rubik;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+
+letter-spacing: 0.02em;
+
+color: rgba(46, 102, 219, 0.6);
+}
