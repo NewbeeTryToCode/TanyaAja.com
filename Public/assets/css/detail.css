@@ -1,0 +1,61 @@
+.categories{
+    justify-content: space-between;
+}
+
+.questions, .answers, .yourAnswer{
+    padding:40px;
+}
+
+.answerTitle{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#replyInput{
+    width: 90%;
+    border: 0;
+    border-bottom: 1px solid #e4e3e3;
+    margin-top: 10px;
+}
+
+button[name=reply], button[name=post]{
+    border: 0;
+    margin-left: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 40px;
+}
+
+
+button[name=reply]:hover, button[name=post]:hover{
+    outline: none;
+    font-weight: bold;
+}
+
+
+#replyInput:focus, button[name=reply]:focus, #foto:focus, .ansText:focus, button[name=post]:focus{
+    outline: none;
+}
+
+.answer p.coklat{
+    font-size: 18px;
+}
+
+.ansText{
+    padding:20px;
+    border-radius: 16px;
+    width: 100%;
+    border-color:  #c5c5c5;
+    transition: 0.3s;
+}
+
+.ansText:focus{
+    border-width: 3px;
+}
+
+.btnPost{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
