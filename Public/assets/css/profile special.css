@@ -1,11 +1,14 @@
 .avatar{
-    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+    max-width: 100%;
     width: 100px;
     height: 100px;
-    left: 365px;
-    top: 50px;
-    border-radius: 100px;
+    max-height: 100%;
 }
+
 
 .parrent{
     position: relative;
@@ -15,45 +18,19 @@
 
 .background{
     position: relative;
-    top: 0;
-    left: 0;
-    
-    width: 860px;
+    width: 100%;
 }
 
 .bawahback{
     color: #194B4F;
-   
+    text-align: center;
     font-style: normal;
     /* identical to box height, or 18px */
     letter-spacing: 0.02em;
     font-weight: 500;
     font-size: 18px;
     line-height: 100%;
-    margin-left: 236px;
-}
-
-.barsatu{
-    position: relative;  
-    display: flex;
-    flex-direction: row;
-}
-.circlecheck{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 40px;
-    height: 40px;
-    padding-left: 68px;
-}
-
-.bardua{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 24px;
-    height: 18px;
-    padding-left: 66px;
+   
 }
 
 .abu{
