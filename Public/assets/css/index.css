@@ -96,7 +96,11 @@
 }
 
 .card-landing .card-main-content .card {
+<<<<<<< HEAD
     margin: 15vh 30px;
+=======
+    width: 400px;
+>>>>>>> 9a6ab7e3e7c66362bed7f33a8fedb9fb6fcec742
     display: flex;
     flex-direction: column;
     width: 25vw;
@@ -135,14 +139,20 @@
 }
 
 .card-landing .card-main-content .card .card-footer .avatar-identitas {
+<<<<<<< HEAD
     display: inline-flex;
     flex-wrap: wrap;
+=======
+    border: 2px solid yellow;
+    display: flex;
+>>>>>>> 9a6ab7e3e7c66362bed7f33a8fedb9fb6fcec742
     flex-direction: column;
     justify-content: center;
     margin: 0 10px;
 }
 
 .card-landing .card-main-content .card .card-footer .avatar-identitas h4 {
+<<<<<<< HEAD
     margin: 0;
 }
 
@@ -158,6 +168,15 @@
     border-radius: 20px;
     padding: 2rem 2.5rem;
     margin: 0 2.5em;
+=======
+    border: 1px solid green;
+    margin:0;
+}
+
+.card-landing .card-main-content .card .card-footer .avatar-identitas p {
+    border: 1px solid black;
+    margin: 0;
+>>>>>>> 9a6ab7e3e7c66362bed7f33a8fedb9fb6fcec742
 }
 
 @media(max-width: 768px) {

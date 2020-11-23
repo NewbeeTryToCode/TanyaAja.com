@@ -1,0 +1,10 @@
+.icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nocrudicon, .crudicon{
+    display: flex;
+    flex-direction: row;
+}
