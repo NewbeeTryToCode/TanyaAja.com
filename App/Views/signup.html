@@ -48,11 +48,40 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password">
                     <span><i class="fas fa-eye" id="showpass"></i></span>
+                    <div class="popover-password">
+                        <p><span class="result"></span></p>
+                        <div class="progress">
+                            <div id="password-strength" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li>
+                            <span class="low-upper-case">
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                Lowercase &amp; Uppercase
+                            </span>
+                        </li>
+                        <li>
+                            <span class="one-number">
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                Number (0-9)
+                            </span>
+                        </li>
+                        <li>
+                            <span class="one-special-char">
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                Special character (!@#$%^&*)
+                            </span>
+                        </li>
+                        <li>
+                            <span class="eight-character">
+                                <i class="fas fa-circle" aria-hidden="true"></i>
+                                Atleast 8 character
+                            </span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="input-group">
-                    <label for="repassword">Retype Password</label>
-                    <input type="password" name="repassword" id="repassword">
-                </div>
+
                 <div class="input-group btn">
                     <button class="btn-login">Sign up</button>
                 </div>
