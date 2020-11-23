@@ -1,3 +1,33 @@
+.progress-bar {
+    height: 3px !important;
+    background-color: rgba(128, 128, 128, 0.367);
+}
+
+.progress-bar-danger {
+    background-color: red;
+}
+
+.progress-bar-warning {
+    background-color: yellow;
+}
+
+.progress-bar-success {
+    background-color: green;
+}
+
+.list-unstyled {
+    list-style: none;
+    margin-left: -20px;
+}
+
+span .fas.fa-circle {
+    font-size: 12px;
+}
+
+span .fas.fa-check {
+    color: rgb(5, 224, 5);
+}
+
 .main-section .img-wrapper {
     display: table-cell;
     height: auto;
@@ -12,7 +42,7 @@
     height: 26rem;
     z-index: 0;
     left: 0;
-    bottom: -200px;
+    bottom: -220px;
 }
 
 .graphic2 {
