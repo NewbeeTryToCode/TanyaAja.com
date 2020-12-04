@@ -31,7 +31,7 @@ span .fas.fa-check {
 .main-section .img-wrapper {
     display: table-cell;
     height: auto;
-    background: url("/Public/assets/img/register.svg") center left/contain no-repeat;
+    background: url("../img/register.svg") center left/contain no-repeat;
     width: 60%;
 }
 
