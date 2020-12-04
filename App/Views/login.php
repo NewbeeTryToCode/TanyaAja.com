@@ -24,10 +24,10 @@
                     <a href="../../Public/index.html">Home</a>
                 </li>
                 <li>
-                    <a href="login.html">Login</a>
+                    <a href="login.php">Login</a>
                 </li>
                 <li>
-                    <a href="signup.html">Sign up</a>
+                    <a href="signup.php">Sign up</a>
                 </li>
             </ul>
         </nav>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-footer">
                     <p>Dont have account yet?
-                        <a href="register.html" class="link">Sign up</a>
+                        <a href="register.php" class="link">Sign up</a>
                     </p>
                 </div>
             </form>

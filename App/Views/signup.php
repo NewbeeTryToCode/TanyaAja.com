@@ -23,9 +23,9 @@
                     <a href="../../Public/index.html">Home</a>
                 </li>
                 <li>
-                    <a href="login.html">Login</a>
+                    <a href="login.php">Login</a>
                 </li>
-                <li><a href="signup.html">Sign up</a></li>
+                <li><a href="signup.php">Sign up</a></li>
             </ul>
         </nav>
     </header>
@@ -86,7 +86,7 @@
                     <button class="btn-login">Sign up</button>
                 </div>
                 <div class="form-footer">
-                    <p>Already had an account? <a href="login.html" class="link">Login</a></p>
+                    <p>Already had an account? <a href="login.php" class="link">Login</a></p>
                 </div>
             </form>
         </div>

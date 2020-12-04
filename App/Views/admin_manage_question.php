@@ -1,3 +1,7 @@
+<?php 
+$judul = "Admin Question Manage"
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,8 +19,9 @@
     <!-- My Styles -->
     <link rel="stylesheet" href="../../Public/assets/css/side_navbar.css">
     <link rel="stylesheet" href="../../Public/assets/css/publicq.css">
+    <link rel="stylesheet" href="../../Public/assets/css/myQuestions.css">
 
-    <title>Notification</title>
+    <title>Admin Manage Questions</title>
   </head>
   <body>
 
@@ -24,71 +29,13 @@
     <div class="wrapper">
 
         <!-- Side Bar -->
-        <nav id="sidebar" class="shadow-lg p-4">
-            <div class="sidebar-header d-flex flex-column align-items-center">
-                <img class="avatarImg" src="../../Public/assets/img/profil.jpg" alt="">
-                <h5 class="mt-3 biru">Nathalie</h5>
-                <p class="biru">nathalietheresia@gmail.com</p>
-            </div>
-            <div class="container shadow-sm">
-
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item abu">
-                        <a href="profile.html">Profile</a>
-                    </li>
-                    <li class="list-group-item abu">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Questions</a>
-                        <ul type="none" class="list-group list-group-flush" id="homeSubmenu">
-                            <li class="abu">
-                                <a href="public_questions.html">Public Questions</a>
-                            </li>
-                            <li class="abu">
-                                <a href="my_questions.html">My Questions</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-
-            </div>
-            
-            </ul>
-        </nav>
+        <?php include_once('sidebar.php') ?>
         <!-- Side Bar -->
 
         <div id="content">
             <!-- Nav Bar -->
-            <nav class="navbar navbar-expand-lg navbar-light abu">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="btn abu mr-4">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <a class="navbar-brand" href="#"><h3 class="judul">Notification</h3></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a href="#" class="btn abu shadow-sm rounded ml-2 "><i class="far fa-bell"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="btn abu shadow-sm rounded ml-2"><i class="far fa-envelope"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="btn abu shadow-sm rounded ml-2"><i class="fas fa-cog"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="btn abu shadow-sm rounded ml-2"><i class="fas fa-sign-out-alt"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </nav>
+            <?php include_once('navbar.php') ?>
             <!-- Nav Bar -->
-
-
 
             <!-- main content -->
             <div class="container-fluid shadow-lg">
@@ -116,6 +63,33 @@
                                         <img src="../../Public/assets/img/profil.jpg" alt="">
                                         <p class="ungu">Nathalie</p>
                                     </span>
+                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
+                                    <span class="categories-item shadow-sm ungu">Coding</span>
+                                    <span class="categories-item shadow-sm ungu">WebDev</span>
+                                </div>
+                                <div class="icons">
+                                    <div class="nocrudicon">
+                                        <span class="shadow-sm">
+                                            <i class="far fa-eye"></i>
+                                            <p>7</p>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <i class="far fa-check-circle"></i>
+                                            <p class="green">7</p>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <i class="far fa-check-square"></i>
+                                            <p class="red">7</p>
+                                        </span>
+                                    </div>
+                                    <div class="crudicon">
+                                        <span class="shadow-sm">
+                                            <a href=""><i class="fas fa-pen biru"></i></a>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <a href=""><i class="far fa-trash-alt red"></i></a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <br>
@@ -129,6 +103,33 @@
                                         <img src="../../Public/assets/img/profil.jpg" alt="">
                                         <p class="ungu">Nathalie</p>
                                     </span>
+                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
+                                    <span class="categories-item shadow-sm ungu">Coding</span>
+                                    <span class="categories-item shadow-sm ungu">WebDev</span>
+                                </div>
+                                <div class="icons">
+                                    <div class="nocrudicon">
+                                        <span class="shadow-sm">
+                                            <i class="far fa-eye"></i>
+                                            <p>7</p>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <i class="far fa-check-circle"></i>
+                                            <p class="green">7</p>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <i class="far fa-check-square"></i>
+                                            <p class="red">7</p>
+                                        </span>
+                                    </div>
+                                    <div class="crudicon">
+                                        <span class="shadow-sm">
+                                            <a href=""><i class="fas fa-pen biru"></i></a>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <a href=""><i class="far fa-trash-alt red"></i></a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <br>
@@ -142,6 +143,33 @@
                                         <img src="../../Public/assets/img/profil.jpg" alt="">
                                         <p class="ungu">Nathalie</p>
                                     </span>
+                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
+                                    <span class="categories-item shadow-sm ungu">Coding</span>
+                                    <span class="categories-item shadow-sm ungu">WebDev</span>
+                                </div>
+                                <div class="icons">
+                                    <div class="nocrudicon">
+                                        <span class="shadow-sm">
+                                            <i class="far fa-eye"></i>
+                                            <p>7</p>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <i class="far fa-check-circle"></i>
+                                            <p class="green">7</p>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <i class="far fa-check-square"></i>
+                                            <p class="red">7</p>
+                                        </span>
+                                    </div>
+                                    <div class="crudicon">
+                                        <span class="shadow-sm">
+                                            <a href=""><i class="fas fa-pen biru"></i></a>
+                                        </span>
+                                        <span class="shadow-sm">
+                                            <a href=""><i class="far fa-trash-alt red"></i></a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <br>
