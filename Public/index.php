@@ -12,14 +12,14 @@
 <body class="container full-height-grow">
     <header class="main-header">
         <div class="brand-logo">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="assets/img/logo2.png" alt="TanyaAja?.com">
             </a>
         </div>
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="index.php">Home</a>
                 </li>
                 <li>
                     <a href="../App/Views/login.php">Login</a>
