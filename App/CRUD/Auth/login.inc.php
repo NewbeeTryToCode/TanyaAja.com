@@ -1,5 +1,5 @@
 <?php
-    include "konek.db.php";
+    include "../konek.db.php";
     if (isset($_POST['username']) && isset($_POST['password'])) {
         function validate($data){
             $data = trim($data);

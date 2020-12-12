@@ -37,7 +37,7 @@
         </div>
         <div class="main-form">
             <h1 class="tittle">Login</h1>
-            <form action="../includes/login.inc.php" method="POST">
+            <form action="../CRUD/Auth/login.inc.php" method="POST">
                 <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username">
