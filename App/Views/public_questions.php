@@ -1,4 +1,10 @@
 <?php 
+include("../CRUD/konek.db.php");
+include('../CRUD/Question/functions.php');
+session_start();
+
+$questions = get_all("questions");
+
 $judul = "Public Questions"
 ?>
 
@@ -41,7 +47,11 @@ $judul = "Public Questions"
                 <div class="container-fluid mt-3 p-4">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item abu" id="filterNav">
-                            <h5 class="q-count">280,756 Questions</h5>
+                            <?php if(count($questions) > 0) : ?>
+                                <h5 class="q-count"><?php echo count($questions); ?> Questions</h5>
+                            <?php else: ?>
+                                <h5 class="q-count">No Questions</h5>
+                            <?php endif; ?>
                             <span class="filter-item">
                                 <form class="form-inline">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -53,97 +63,46 @@ $judul = "Public Questions"
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                    <span class="categories-item shadow-sm ungu">Coding</span>
-                                    <span class="categories-item shadow-sm ungu">WebDev</span>
-                                </div>
-                                <div class="icons">
-                                    <span class="shadow-sm">
-                                        <i class="far fa-eye"></i>
-                                        <p>7</p>
-                                    </span>
-                                    <span class="shadow-sm">
-                                        <i class="far fa-check-circle"></i>
-                                        <p class="green">7</p>
-                                    </span>
-                                    <span class="shadow-sm">
-                                        <i class="far fa-check-square"></i>
-                                        <p class="red">7</p>
-                                    </span>
-                                </div>
-                            </div>
-                            <br>
-                        </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                    <span class="categories-item shadow-sm ungu">Coding</span>
-                                    <span class="categories-item shadow-sm ungu">WebDev</span>
-                                </div>
-                                <div class="icons">
-                                    <span class="shadow-sm">
-                                        <i class="far fa-eye"></i>
-                                        <p>7</p>
-                                    </span>
-                                    <span class="shadow-sm">
-                                        <i class="far fa-check-circle"></i>
-                                        <p class="green">7</p>
-                                    </span>
-                                    <span class="shadow-sm">
-                                        <i class="far fa-check-square"></i>
-                                        <p class="red">7</p>
-                                    </span>
-                                </div>
-                            </div>
-                            <br>
-                        </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                    <span class="categories-item shadow-sm ungu">Coding</span>
-                                    <span class="categories-item shadow-sm ungu">WebDev</span>
-                                </div>
-                                <div class="icons">
-                                    <span class="shadow-sm">
-                                        <i class="far fa-eye"></i>
-                                        <p>7</p>
-                                    </span>
-                                    <span class="shadow-sm">
-                                        <i class="far fa-check-circle"></i>
-                                        <p class="green">7</p>
-                                    </span>
-                                    <span class="shadow-sm">
-                                        <i class="far fa-check-square"></i>
-                                        <p class="red">7</p>
-                                    </span>
-                                </div>
-                            </div>
-                            <br>
-                        </li>
+                        <?php if(count($questions) > 0) :  ?>
+                            <?php foreach($questions as $question) : ?>
+                                <li class="list-group-item abu">
+                                    <div class="questionsContainer">
+                                        <a href="./detail_questions.php?id=<?php echo $question['id'];?>" class="title"><h4><?php echo $question['title']; ?></h4></a>
+                                        <p class="description">
+                                            <?php $paragraf = limit_text($question['description'], 25); echo $paragraf ?>
+                                        </p>
+                                        <div class="categories">
+                                            <span class="profile">
+                                                <img src="../../Public/assets/img/profil.jpg" alt="">
+                                                <p class="ungu">Nathalie</p>
+                                            </span>
+                                            <?php $categories = get_all_byId("categories", $question["id"]);?>
+                                            <?php foreach($categories as $category) : ?>
+                                                <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="icons">
+                                            <span class="shadow-sm">
+                                                <i class="far fa-eye"></i>
+                                                <p>7</p>
+                                            </span>
+                                            <span class="shadow-sm">
+                                                <i class="far fa-check-circle"></i>
+                                                <p class="green">7</p>
+                                            </span>
+                                            <span class="shadow-sm">
+                                                <i class="far fa-check-square"></i>
+                                                <p class="red">7</p>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </ul>
+
+                    <!-- Pagination -->
                     <div class="pageContainer">
                         <ul class="pagination shadow-sm">
                             <li class="page-item">

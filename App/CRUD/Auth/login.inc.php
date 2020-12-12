@@ -30,16 +30,16 @@
                 if ($row['username'] === $user && $row['password'] === $pwd) {
                     if ($row['role'] === 'admin') {
                         session_start();
-                        $_SESSION['username'] = $row=['username'];
-                        $_SESSION['role'] = $row=['role'];
-                        $_SESSION['id'] = $row=['id'];
+                        $_SESSION['username'] = $row['username'];
+                        $_SESSION['role'] = $row['role'];
+                        $_SESSION['id'] = $row['id'];
                         header("Location: ../../Views/admin_manage_question.php");
                         exit(); 
                     }elseif($row['role'] === 'user'){
                         session_start();
-                        $_SESSION['username'] = $row=['username'];
-                        $_SESSION['role'] = $row=['role'];
-                        $_SESSION['id'] = $row=['id'];
+                        $_SESSION['username'] = $row['username'];
+                        $_SESSION['role'] = $row['role'];
+                        $_SESSION['id'] = $row['id'];
                         header("Location: ../../Views/public_questions.php");
                         exit();
                     }else{
