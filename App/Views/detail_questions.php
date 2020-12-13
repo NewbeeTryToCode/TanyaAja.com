@@ -33,7 +33,7 @@ $judul = "Questions Detail"
     <!-- My Styles -->
     <link rel="stylesheet" href="../../Public/assets/css/side_navbar.css">
     <link rel="stylesheet" href="../../Public/assets/css/publicq.css">
-    <link rel="stylesheet" href="../../Public/assets/css/detail.css">
+    <link rel="stylesheet" href="../../Public/assets/css/detail.css?v=<?php echo time();?>">
 
     <title>Questions Detail</title>
   </head>
@@ -59,8 +59,8 @@ $judul = "Questions Detail"
                         <p class="coklat"><?php echo $question['description']; ?></p>
                         <!-- image -->
                         <?php if( $question['image'] != "no image" && !empty($question['image'])) : ?>
-                            <div class="imageContainer" style="width: 100%; height:400px; background-color:  rgb(230, 230, 230); padding:20px; border-radius:16px; margin-bottom:15px">
-                                <img src="../CRUD/Question/img/<?php echo $question['image'];?>" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+                            <div class="imageContainer">
+                                <img src="../CRUD/Question/img/<?php echo $question['image'];?>" alt="gambar">
                             </div>
                         <?php endif; ?>
                         <div class="categories">

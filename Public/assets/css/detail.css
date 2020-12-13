@@ -3,13 +3,17 @@
 }
 
 .imageContainer{
-    padding: 20px;
-    background-color: rgb(230, 230, 230);
-    border-radius: 16px;
+    width: 100%; 
+    height:400px; 
+    background-color:  rgb(230, 230, 230); 
+    padding:20px; 
+    border-radius:16px; 
+    margin-bottom:15px
 }
 .imageContainer img{
-    width: 100px;
-    height: 100px;
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
 }
 
 .questions, .answers, .yourAnswer{
