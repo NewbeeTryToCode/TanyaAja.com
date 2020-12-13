@@ -2,6 +2,16 @@
     justify-content: space-between;
 }
 
+.imageContainer{
+    padding: 20px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 16px;
+}
+.imageContainer img{
+    width: 100px;
+    height: 100px;
+}
+
 .questions, .answers, .yourAnswer{
     padding:40px;
 }

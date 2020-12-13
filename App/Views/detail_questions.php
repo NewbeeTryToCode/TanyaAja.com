@@ -1,4 +1,18 @@
 <?php 
+include("../CRUD/konek.db.php");
+include('../CRUD/Question/functions.php');
+include("../CRUD/session.php");
+
+// id pertanyaan
+if( isset($_GET['id']) ){
+
+    // ambil id pertanyaan
+    $id = $_GET['id'];
+
+    // ambil data pertanyaan
+    $question = get_all_byId("questions", "id", $id)[0];
+}
+
 $judul = "Questions Detail"
 ?>
 
@@ -41,18 +55,25 @@ $judul = "Questions Detail"
             <div class="container-fluid abu mt-3 p-4">
                 <!-- question -->
                 <div class="container shadow rounded-lg questions">
-                    <a href="" class="title"><h4>How to include API</h4></a>
-                        <p class="coklat">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                        <img src="" alt="">
+                    <a href="" class="title"><h4><?php echo $question['title']; ?></h4></a>
+                        <p class="coklat"><?php echo $question['description']; ?></p>
+                        <!-- image -->
+                        <?php if( $question['image'] != "no image" && !empty($question['image'])) : ?>
+                            <div class="imageContainer" style="width: 100%; height:400px; background-color:  rgb(230, 230, 230); padding:20px; border-radius:16px; margin-bottom:15px">
+                                <img src="../CRUD/Question/img/<?php echo $question['image'];?>" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                        <?php endif; ?>
                         <div class="categories">
                             <span class="profile">
                                 <img src="../../Public/assets/img/profil.jpg" alt="">
                                 <p class="ungu">Nathalie</p>
                             </span>
                             <span class="categoriesContainer">
-                                <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                <span class="categories-item shadow-sm ungu">Coding</span>
-                                <span class="categories-item shadow-sm ungu">WebDev</span>
+                                <!-- categories -->
+                                <?php $categories = get_all_byId("categories", "question_id", $question["id"]);?>
+                                <?php foreach($categories as $category) : ?>
+                                    <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
+                                <?php endforeach; ?>
                             </span>
                         </div>
                         <div class="icons">

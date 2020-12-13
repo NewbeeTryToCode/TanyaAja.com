@@ -76,6 +76,7 @@ $judul = "Public Questions";
                                                 <img src="../../Public/assets/img/profil.jpg" alt="">
                                                 <p class="ungu">Nathalie</p>
                                             </span>
+                                            <!-- categories -->
                                             <?php $categories = get_all_byId("categories", "question_id", $question["id"]);?>
                                             <?php foreach($categories as $category) : ?>
                                                 <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
