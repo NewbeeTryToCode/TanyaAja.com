@@ -1,5 +1,21 @@
 <?php 
-$judul = "My Question"
+include("../CRUD/konek.db.php");
+include('../CRUD/Question/functions.php');
+include("../CRUD/session.php");
+
+
+// ambil data user
+$user = [
+    "username" => $_SESSION['username'],
+    "id" => $_SESSION['id'],
+    "role" => $_SESSION['role']
+];
+
+// ambil pertanyaan dari user yang login
+$questions = get_all_byId("questions", "user_id", $user['id']);
+
+
+$judul = "My Question";
 ?>
 
 <!doctype html>
@@ -54,127 +70,54 @@ $judul = "My Question"
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                    <span class="categories-item shadow-sm ungu">Coding</span>
-                                    <span class="categories-item shadow-sm ungu">WebDev</span>
-                                </div>
-                                <div class="icons">
-                                    <div class="nocrudicon">
-                                        <span class="shadow-sm">
-                                            <i class="far fa-eye"></i>
-                                            <p>7</p>
+                        <?php foreach( $questions as $question ) : ?>
+                            <li class="list-group-item abu">
+                                <div class="questionsContainer">
+                                    <a href="" class="title"><h4><?php echo $question['title'] ?></h4></a>
+                                    <p class="description">
+                                        <?php $paragraf = limit_text($question['description'], 25); echo $paragraf ?>
+                                    </p>
+                                    <div class="categories">
+                                        <span class="profile">
+                                            <img src="../../Public/assets/img/profil.jpg" alt="">
+                                            <p class="ungu">Nathalie</p>
                                         </span>
-                                        <span class="shadow-sm">
-                                            <i class="far fa-check-circle"></i>
-                                            <p class="green">7</p>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <i class="far fa-check-square"></i>
-                                            <p class="red">7</p>
-                                        </span>
+                                        <?php $categories = get_all_byId("categories", "question_id", $question["id"]);?>
+                                        <?php foreach($categories as $category) : ?>
+                                            <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <div class="crudicon">
-                                        <span class="shadow-sm">
-                                            <a href=""><i class="fas fa-pen biru"></i></a>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <a href=""><i class="far fa-trash-alt red"></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                    <span class="categories-item shadow-sm ungu">Coding</span>
-                                    <span class="categories-item shadow-sm ungu">WebDev</span>
-                                </div>
-                                <div class="icons">
-                                    <div class="nocrudicon">
-                                        <span class="shadow-sm">
-                                            <i class="far fa-eye"></i>
-                                            <p>7</p>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <i class="far fa-check-circle"></i>
-                                            <p class="green">7</p>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <i class="far fa-check-square"></i>
-                                            <p class="red">7</p>
-                                        </span>
-                                    </div>
-                                    <div class="crudicon">
-                                        <span class="shadow-sm">
-                                            <a href=""><i class="fas fa-pen biru"></i></a>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <a href=""><i class="far fa-trash-alt red"></i></a>
-                                        </span>
+                                    <div class="icons">
+                                        <div class="nocrudicon">
+                                            <span class="shadow-sm">
+                                                <i class="far fa-eye"></i>
+                                                <p>7</p>
+                                            </span>
+                                            <span class="shadow-sm">
+                                                <i class="far fa-check-circle"></i>
+                                                <p class="green">7</p>
+                                            </span>
+                                            <span class="shadow-sm">
+                                                <i class="far fa-check-square"></i>
+                                                <p class="red">7</p>
+                                            </span>
+                                        </div>
+                                        <div class="crudicon">
+                                            <span class="shadow-sm">
+                                                <a href="./edit_question.php?id=<?php echo $question['id'];?>"><i class="fas fa-pen biru"></i></a>
+                                            </span>
+                                            <span class="shadow-sm">
+                                                <a href="../CRUD/Question/delete.php?id=<?php echo $question['id'];?>"><i class="far fa-trash-alt red"></i></a>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                        </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                    <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                    <span class="categories-item shadow-sm ungu">Coding</span>
-                                    <span class="categories-item shadow-sm ungu">WebDev</span>
-                                </div>
-                                <div class="icons">
-                                    <div class="nocrudicon">
-                                        <span class="shadow-sm">
-                                            <i class="far fa-eye"></i>
-                                            <p>7</p>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <i class="far fa-check-circle"></i>
-                                            <p class="green">7</p>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <i class="far fa-check-square"></i>
-                                            <p class="red">7</p>
-                                        </span>
-                                    </div>
-                                    <div class="crudicon">
-                                        <span class="shadow-sm">
-                                            <a href=""><i class="fas fa-pen biru"></i></a>
-                                        </span>
-                                        <span class="shadow-sm">
-                                            <a href=""><i class="far fa-trash-alt red"></i></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </li>
+                                <br>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
+
+                    <!-- Pagination -->
                     <div class="pageContainer">
                         <ul class="pagination shadow-sm">
                             <li class="page-item">

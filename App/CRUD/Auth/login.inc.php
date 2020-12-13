@@ -33,6 +33,7 @@
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['role'] = $row['role'];
                         $_SESSION['id'] = $row['id'];
+                        $_SESSION['login'] = true;
                         header("Location: ../../Views/admin_manage_question.php");
                         exit(); 
                     }elseif($row['role'] === 'user'){
@@ -40,6 +41,7 @@
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['role'] = $row['role'];
                         $_SESSION['id'] = $row['id'];
+                        $_SESSION['login'] = true;
                         header("Location: ../../Views/public_questions.php");
                         exit();
                     }else{

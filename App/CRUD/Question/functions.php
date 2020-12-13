@@ -119,15 +119,15 @@ function get_max_id($table){
 
 function get_all($table){
     global $conn;
-    $query = "SELECT * FROM $table";
+    $query = "SELECT * FROM $table ORDER BY id DESC";
     $result = mysqli_query($conn, $query);
 
     return get_data($result);
 }
 
-function get_all_byId($table, $id){
+function get_all_byId($table, $column, $id){
     global $conn;
-    $query = "SELECT * FROM $table WHERE question_id = $id";
+    $query = "SELECT * FROM $table WHERE $column = $id ORDER BY id DESC";
     $result = mysqli_query($conn, $query);
 
     return get_data($result);

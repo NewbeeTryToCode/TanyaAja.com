@@ -1,7 +1,7 @@
 <?php 
 include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
-session_start();
+include("../CRUD/session.php");
 
 // tombol tambah
 if( isset($_POST['create']) ){

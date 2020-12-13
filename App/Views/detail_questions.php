@@ -43,6 +43,7 @@ $judul = "Questions Detail"
                 <div class="container shadow rounded-lg questions">
                     <a href="" class="title"><h4>How to include API</h4></a>
                         <p class="coklat">i cannot include API on my JavaScript code please help me on fixing this...</p>
+                        <img src="" alt="">
                         <div class="categories">
                             <span class="profile">
                                 <img src="../../Public/assets/img/profil.jpg" alt="">
