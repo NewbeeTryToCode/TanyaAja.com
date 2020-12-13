@@ -1,6 +1,14 @@
 <?php 
 
+function delete_byId($table, $id){
 
+	global $conn;
+    $query = "DELETE FROM $table WHERE id=" . $id;
+    $result = mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+
+}
 
 function insert_qustion($data){
 

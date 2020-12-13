@@ -5,7 +5,7 @@ session_start();
 
 $questions = get_all("questions");
 
-$judul = "Public Questions"
+$judul = "Public Questions";
 ?>
 
 <!doctype html>
