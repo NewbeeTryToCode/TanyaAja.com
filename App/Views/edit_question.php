@@ -1,4 +1,47 @@
 <?php 
+include("../CRUD/konek.db.php");
+include('../CRUD/Question/functions.php');
+include("../CRUD/session.php");
+
+// tombol tambah
+if( isset($_POST['update']) ){
+
+    // validasi input
+    if (update_question($_POST) > 0){
+		echo "
+			<script>
+				alert ('data berhasil diubah');
+				document.location.href = 'my_questions.php';
+			</script>
+
+		";
+	}else{
+		echo "
+			<script>
+				alert ('data gagal diubah');
+				document.location.href = 'my_questions.php';
+			</script>
+
+		";
+	}
+
+}
+
+// id pertanyaan
+if( isset($_GET['id']) ){
+
+    // ambil id pertanyaan
+    $id = $_GET['id'];
+
+    // ambil data pertanyaan
+    $question = get_all_byId("questions", "id", $id)[0];
+
+    // ambil kategori
+    $categories = get_all_byId("categories", "question_id", $question['id']);
+    $categories = implode(', ', array_column($categories, 'name'));
+
+}
+
 $judul = "Edit Question"
 ?>
 
@@ -41,26 +84,30 @@ $judul = "Edit Question"
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item abu">
                             <div class="quesion">
-                                <form action="">
+                                <form action="./edit_question.php" method="POST" enctype='multipart/form-data'>
+                                    <input type="hidden" name="id" value="<?php echo $question['id'];?>">
+                                    <input type="hidden" name="old_image" value="<?php echo $question["image"]; ?>">
                                     <div class="form-group">
                                         <label for="title">Question Title</label>
-                                        <input type="text" class="form-control" name="title" id="title" value="Suami saya selingkuh" placeholder="Your Questions Title">
+                                        <input type="text" class="form-control" name="title" id="title"  placeholder="Your Questions Title" value="<?php echo $question['title'];?>">
                                     </div><br>
                                     <div class="form-group">
                                         <label for="descrip">Question Description</label>
-                                        <textarea class="form-control" id="descrip" name="descrip" rows="3" placeholder="Your Question Description">Suami saya selingkuh nih sis gimana yaa caranya biar dia ngaku?</textarea>
+                                        <textarea class="form-control" id="descrip" name="descrip" rows="3" placeholder="Your Question Description"><?php echo $question['description'];?></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="category">Category</label>
-                                        <input type="text" class="form-control box" name="category" id="category" placeholder="Add Questions Category (coding, JavaScript)" value="keluarga, suami">
+                                        <input type="text" class="form-control box" name="category" id="category" placeholder="Add Questions Category (coding, JavaScript)" value="<?php echo $categories;?>">
                                     </div>
                                     <p>Your Question Files</p>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <input type="file" name="image" class="custom-file-input" id="customFile">
                                         <label class="custom-file-label box" for="customFile">Choose file</label>
                                     </div>
+                                    <br><br>
+                                    <button type="submit" class="btn btn-outline-primary tombol" name="update"><img src="../../Public/assets/img/send-black-18dp.svg" alt="send"> Update</button> 
                                 </form>
-                                <br><button type="button" class="btn btn-outline-primary tombol"><a href=".."><img src="../../Public/assets/img/send-black-18dp.svg" alt="send"> Update</a></button> 
+                                
                             </div>
                         </li>
                     </ul>

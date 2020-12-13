@@ -1,9 +1,9 @@
 <?php 
 
-function delete_byId($table, $id){
+function delete_byId($table, $column, $id){
 
 	global $conn;
-    $query = "DELETE FROM $table WHERE id=" . $id;
+    $query = "DELETE FROM $table WHERE $column =" . $id;
     $result = mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
@@ -26,31 +26,81 @@ function insert_qustion($data){
 	$image = upload(); //nilai yang ingin dibalikan nantinya berupa nama file gambar, agar nama file bisa dimasukan ke database
 	if ( !$image ){
 		return false;
-    }
+	}
 
 	// query insert data
-	$query = "INSERT INTO questions
-				VALUES
-				('', '$title', '$descrip', '$image', '$created_at', '$updated_at', $id)
+	$query = "INSERT INTO questions VALUES ('', \"$title\", \"$descrip\", \"$image\", '$created_at', '$updated_at', $id);";
+
+	$result = mysqli_query($conn, $query);
+	if($result){
+
+		// insert category
+		$question_id = get_max_id("questions");
+		if( !empty($data["category"]) ){
+			$categories = htmlspecialchars($data["category"]);
+			$categories = explode(",", $categories);
+	
+			// masukan ke database
+			foreach($categories as $category){
+				$category = trim($category);
+				$query = "INSERT INTO categories VALUES ('', '$category', $question_id);";
+				mysqli_query($conn, $query);
+			}
+			
+		}
+
+	}
+    
+	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
+}
+
+function update_question($data){
+	global $conn;
+
+	// ambil data dari tiap elemen dalam form
+	// htmlspecialchars() digunakan untuk membedakan script html, agar user tidak bisa menulis script html pada pengisian data
+	$question_id = $data["id"];
+	$title = htmlspecialchars($data["title"]);
+	$descrip = htmlspecialchars($data["descrip"]);
+	$old_image = htmlspecialchars($data["old_image"]);
+    $created_at = $updated_at = date('Y-m-d H:i:s');
+
+	// cek apakah user pilih gambar baru atau tidak
+	if ( $_FILES['image']['error'] === 4 ){
+		$image = $old_image;
+	}else{
+		$image= upload();
+	}
+	
+
+	// query insert data
+	$query = "UPDATE questions SET
+				title = \"$title\",
+				description = \"$descrip\",
+				updated_at = '$updated_at',
+				image = '$image'
+			WHERE id = $question_id
 			";
 
-    mysqli_query($conn, $query);
-    
-    // insert category
-    if( !empty($data["category"]) ){
-        $categories = htmlspecialchars($data["category"]);
-        $categories = explode(",", $categories);
-        $question_id = get_max_id("questions");
+	$result = mysqli_query($conn, $query);
+	if($result){
 
-        // masukan ke database
-        foreach($categories as $category){
-            $category = trim($category);
-            $query = "INSERT INTO categories VALUES ('', '$category', $question_id);";
-            mysqli_query($conn, $query);
-        }
-        
-    }
-    
+		// insert category
+		delete_byId("categories", "question_id", $question_id);
+		if( !empty($data["category"]) ){
+			$categories = htmlspecialchars($data["category"]);
+			$categories = explode(",", $categories);
+	
+			// masukan ke database
+			foreach($categories as $category){
+				$category = trim($category);
+				$query = "INSERT INTO categories VALUES ('', '$category', $question_id);";
+				mysqli_query($conn, $query);
+			}
+			
+		}
+
+	}
 
 	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
 }
@@ -117,6 +167,16 @@ function get_data($result){
 }
 
 // fungsi sql
+function get_all_byId_withJoin($table1, $table2, $onkey1, $onkey2, $id){
+
+	global $conn;
+    $query = "SELECT * FROM $table1 as t1 INNER JOIN $table2 as t2 ON t1.$onkey1 = t2.$onkey2 WHERE id = $id ORDER BY id DESC";
+    $result = mysqli_query($conn, $query);
+
+    return get_data($result);
+
+}
+
 function get_max_id($table){
     global $conn;
     $query = "SELECT MAX(id)  FROM $table";

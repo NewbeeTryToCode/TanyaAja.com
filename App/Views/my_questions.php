@@ -58,7 +58,11 @@ $judul = "My Question";
                 <div class="container-fluid mt-3 p-4">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item abu" id="filterNav">
-                            <h5 class="q-count">280,756 Questions</h5>
+                            <?php if(count($questions) > 0) : ?>
+                                <h5 class="q-count"><?php echo count($questions); ?> Questions</h5>
+                            <?php else: ?>
+                                <h5 class="q-count">No Questions</h5>
+                            <?php endif; ?>
                             <span class="filter-item">
                                 <form class="form-inline">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

@@ -7,7 +7,7 @@ include("../session.php");
 $id = $_GET['id'];
 
 // hapus
-if(delete_byId("questions", $id) > 0){
+if(delete_byId("questions", "id", $id) > 0){
     echo " 
         <script> 
             alert('data berhasil dihapus'); 
