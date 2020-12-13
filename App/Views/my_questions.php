@@ -77,7 +77,7 @@ $judul = "My Question";
                         <?php foreach( $questions as $question ) : ?>
                             <li class="list-group-item abu">
                                 <div class="questionsContainer">
-                                    <a href="" class="title"><h4><?php echo $question['title'] ?></h4></a>
+                                    <a href="./detail_questions.php?id=<?php echo $question['id'];?>" class="title"><h4><?php echo $question['title'] ?></h4></a>
                                     <p class="description">
                                         <?php $paragraf = limit_text($question['description'], 25); echo $paragraf ?>
                                     </p>
