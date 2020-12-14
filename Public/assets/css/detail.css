@@ -2,13 +2,26 @@
     justify-content: space-between;
 }
 
+.imageContainer{
+    width: 100%; 
+    height:400px; 
+    background-color:  rgb(230, 230, 230); 
+    padding:20px; 
+    border-radius:16px; 
+    margin-bottom:15px
+}
+.imageContainer img{
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
+}
+
 .questions, .answers, .yourAnswer{
-    padding:40px;
+    padding:30px;
 }
 
 .answerTitle{
     margin-top: 30px;
-    margin-bottom: 30px;
 }
 
 #replyInput{
@@ -58,4 +71,15 @@ button[name=reply]:hover, button[name=post]:hover{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.noAnswers{
+    font-size: 20px;
+    color: grey;
+}
+
+.profile span{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }

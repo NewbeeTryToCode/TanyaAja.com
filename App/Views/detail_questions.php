@@ -1,4 +1,39 @@
 <?php 
+include("../CRUD/konek.db.php");
+include('../CRUD/Question/functions.php');
+include("../CRUD/session.php");
+
+// tombol post
+if( isset($_POST['post']) ){
+    // masukan jawaban ke database
+    insert_answer($_POST);
+}
+
+// tombol reply
+if ( isset($_POST['reply']) ){
+    // masukan balasan ke database
+    insert_reply($_POST);
+}
+
+// id pertanyaan
+if( isset($_GET['id']) && !empty($_GET['id']) ){
+
+    // ambil id pertanyaan
+    $id = $_GET['id'];
+
+    // ambil data pertanyaan
+    $question = get_all_byId("questions", "id", $id)[0];
+    if( !$question ){
+        header("Location:public_questions.php");
+        exit;
+    }
+    // ambil data semua jawaban
+    $answers = get_all_byId("answers", "question_id", $id);
+}else{
+    header("Location:public_questions.php");
+    exit;
+}
+
 $judul = "Questions Detail"
 ?>
 
@@ -18,8 +53,8 @@ $judul = "Questions Detail"
 
     <!-- My Styles -->
     <link rel="stylesheet" href="../../Public/assets/css/side_navbar.css">
-    <link rel="stylesheet" href="../../Public/assets/css/publicq.css">
-    <link rel="stylesheet" href="../../Public/assets/css/detail.css">
+    <link rel="stylesheet" href="../../Public/assets/css/publicq.css?v=<?php echo time();?>">
+    <link rel="stylesheet" href="../../Public/assets/css/detail.css?v=<?php echo time();?>">
 
     <title>Questions Detail</title>
   </head>
@@ -38,68 +73,110 @@ $judul = "Questions Detail"
             <!-- Nav Bar -->
 
             <!-- main content -->
-            <div class="container-fluid abu mt-3 p-4">
+            <div class="container-fluid abu mt-3 p-3">
                 <!-- question -->
                 <div class="container shadow rounded-lg questions">
-                    <a href="" class="title"><h4>How to include API</h4></a>
-                        <p class="coklat">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                        <div class="categories">
-                            <span class="profile">
-                                <img src="../../Public/assets/img/profil.jpg" alt="">
-                                <p class="ungu">Nathalie</p>
-                            </span>
-                            <span class="categoriesContainer">
-                                <span class="categories-item shadow-sm ungu">JavaScript</span>
-                                <span class="categories-item shadow-sm ungu">Coding</span>
-                                <span class="categories-item shadow-sm ungu">WebDev</span>
-                            </span>
+                    <div class="dateTime">
+                        <?php $date = date_create($question['updated_at']);?>
+                        <pre><?php echo date_format($date,"d M Y") ?></pre>
+                    </div>
+                    <a href="" class="title"><h4><?php echo $question['title']; ?></h4></a>
+                    <p class="coklat"><?php echo $question['description']; ?></p>
+                    <!-- image -->
+                    <?php if( $question['image'] != "no image" && !empty($question['image'])) : ?>
+                        <div class="imageContainer">
+                            <img src="../CRUD/Question/img/<?php echo $question['image'];?>" alt="gambar">
                         </div>
-                        <div class="icons">
-                            <span class="shadow-sm">
-                                <i class="far fa-eye"></i>
-                                <p>7</p>
-                            </span>
-                            <span class="shadow-sm">
-                                <i class="far fa-check-circle"></i>
-                                <p class="green">7</p>
-                            </span>
-                            <span class="shadow-sm">
-                                <i class="far fa-check-square"></i>
-                                <p class="red">7</p>
-                            </span>
-                        </div>
-                </div>
-                <!-- question -->
-
-                <div class="container answerTitle">
-                    <h3>Answer</h3>
-                </div>
-
-                <!-- answer -->
-                <div class="container shadow rounded-lg answers">
-                    <p class="coklat">I dont know how to fix it but fighting!!! </p>
+                    <?php endif; ?>
                     <div class="categories">
                         <span class="profile">
                             <img src="../../Public/assets/img/profil.jpg" alt="">
                             <p class="ungu">Nathalie</p>
                         </span>
+                        <span class="categoriesContainer">
+                            <!-- categories -->
+                            <?php $categories = get_all_byId("categories", "question_id", $question["id"]);?>
+                            <?php foreach($categories as $category) : ?>
+                                <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
+                            <?php endforeach; ?>
+                        </span>
                     </div>
-                    <hr>
-                    <div class="container">
-                        <p class="coklat">I love you gek iluh!!</p>
-                        <div class="categories">
-                            <span class="profile">
-                                <img src="../../Public/assets/img/profil.jpg" alt="">
-                                <p class="ungu">Nathalie</p>
-                            </span>
-                        </div>
+                    <div class="icons">
+                        <span class="shadow-sm">
+                            <i class="far fa-eye"></i>
+                            <p>7</p>
+                        </span>
+                        <span class="shadow-sm">
+                            <i class="far fa-check-circle"></i>
+                            <p class="green">7</p>
+                        </span>
+                        <span class="shadow-sm">
+                            <i class="far fa-check-square"></i>
+                            <p class="red">7</p>
+                        </span>
                     </div>
-                    <form action="#">
-                        <input type="text" class="abu" id="replyInput" placeholder="add reply">
-                        <button name="reply" class="shadow-sm">reply</button>
-                    </form>
-                    
                 </div>
+                <!-- question -->
+
+                <div class="container answerTitle">
+                    <h3>Answers</h3>
+                </div>
+
+                <!-- answer -->
+                <?php if( count($answers) > 0 ) : ?>
+                    <?php foreach( $answers as $answer ) : ?>
+                        <div class="container shadow rounded-lg answers mt-5">
+                            <div class="dateTime">
+                                <?php $date = date_create($answer['updated_at']);?>
+                                <pre><?php echo date_format($date,"d M Y") ?></pre>
+                            </div>
+                            <p class="coklat mt-2"><?php echo $answer['description']; ?></p>
+                            <!-- image -->
+                            <?php if( $answer['image'] != "no image" && !empty($answer['image'])) : ?>
+                                <div class="imageContainer">
+                                    <img src="../CRUD/Question/img/<?php echo $answer['image'];?>" alt="gambar">
+                                </div>
+                            <?php endif; ?>
+                            <!-- image -->
+                            <div class="profileContainer">
+                                <span class="profile">
+                                    <img src="../../Public/assets/img/profil.jpg" alt="">
+                                    <p class="ungu">Nathalie</p>
+                                </span>
+                            </div>
+                            <hr>
+
+                            <!-- replies -->
+                            <?php $replies = get_all_byId("replies", "answer_id", $answer['id']); ?>
+                            <?php foreach( $replies as $reply ) : ?>
+                            <div class="container">
+                                <p class="coklat"><?php echo $reply['description']; ?></p>
+                                <div class="profileContainer">
+                                    <span class="profile">
+                                        <img src="../../Public/assets/img/profil.jpg" alt="">
+                                        <?php $date = date_create($reply['updated_at']);?>
+                                        <span>
+                                            <p class="ungu">Nathalie</p>
+                                            <pre class="dateTime replies"><?php echo " - " . date_format($date,"d M Y") ?></pre>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                            <!-- replies -->
+
+                            <!-- reply input-->
+                            <form action="./detail_questions.php?id=<?php echo $question['id'];?>" method="POST">
+                                <input type="hidden" name="answer_id" value="<?php echo $answer['id'];?>">
+                                <input type="text" class="abu" id="replyInput" placeholder="add reply" name="replyInput">
+                                <button type="submit" name="reply" class="shadow-sm">reply</button>
+                            </form>
+                            <!-- reply input-->
+                        </div>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <div class="container noAnswers">No Answer</div>
+                <?php endif; ?>
                 <!-- answer -->
 
                 <div class="container answerTitle">
@@ -107,10 +184,11 @@ $judul = "Questions Detail"
                 </div>
 
                 <!-- your answer -->
-                <div class="container shadow rounded-lg yourAnswer">
-                    <form action="">
+                <div class="container shadow rounded-lg yourAnswer mt-4" >
+                    <form action="./detail_questions.php?id=<?php echo $question['id'];?>" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="question_id" value="<?php echo $question['id'];?>">
                         <label for="foto">Add your image here</label><br>
-                        <input type="file" id="foto">
+                        <input type="file" id="foto" name="image">
                         <hr>
                         <textarea name="yAnswerDesc" id="" cols="30" rows="5" placeholder="Add your answer here" class="abu ansText">I think..</textarea>
                         <br><br>

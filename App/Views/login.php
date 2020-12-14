@@ -14,14 +14,14 @@
 <body class="full-height-grow container">
     <header class="main-header">
         <div class="brand-logo">
-            <a href="../../Public/index.html">
+            <a href="../../Public/index.php">
                 <img src="../../Public/assets/img/logo2.png" alt="TanyaAja?.com">
             </a>
         </div>
         <nav class="main-nav">
             <ul>
                 <li>
-                    <a href="../../Public/index.html">Home</a>
+                    <a href="../../Public/index.php">Home</a>
                 </li>
                 <li>
                     <a href="login.php">Login</a>
@@ -37,7 +37,7 @@
         </div>
         <div class="main-form">
             <h1 class="tittle">Login</h1>
-            <form action="" method="POST">
+            <form action="../CRUD/Auth/login.inc.php" method="POST">
                 <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username">
@@ -48,7 +48,7 @@
                     <span><i class="fas fa-eye" id="showpass"></i></span>
                 </div>
                 <div class="input-group btn">
-                    <button class="btn-login">Login</button>
+                    <button type="submit" class="btn-login">Login</button>
                 </div>
                 <div class="form-footer">
                     <p>Dont have account yet?

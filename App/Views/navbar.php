@@ -29,7 +29,7 @@
                     <a href="#" class="btn abu shadow-sm rounded ml-2"><i class="fas fa-cog"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../../Public/index.html" class="btn abu shadow-sm rounded ml-2"><i class="fas fa-sign-out-alt"></i></a>
+                    <a href="../CRUD/Auth/logout.php" class="btn abu shadow-sm rounded ml-2"><i class="fas fa-sign-out-alt"></i></a>
                 </li>
             </ul>
         </div>

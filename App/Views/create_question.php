@@ -1,4 +1,33 @@
 <?php 
+include("../CRUD/konek.db.php");
+include('../CRUD/Question/functions.php');
+include("../CRUD/session.php");
+
+// tombol tambah
+if( isset($_POST['create']) ){
+
+    // validasi input
+    if (insert_qustion($_POST) > 0){
+		echo "
+			<script>
+				alert ('data berhasil ditambahkan');
+				document.location.href = 'public_questions.php';
+			</script>
+
+		";
+	}else{
+		echo "
+			<script>
+				alert ('data gagal ditambahkan');
+				document.location.href = ''public_questions.php';
+			</script>
+
+		";
+	}
+
+}
+
+
 $judul = "Create Question"
 ?>
 
@@ -41,23 +70,25 @@ $judul = "Create Question"
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item abu">
                             <div class="quesion">
-                                <form action="">
+                                <form action="./create_question.php" method="POST" enctype='multipart/form-data'>
                                     <div class="form-group">
-                                        <input type="text" class="form-control center" name="title" id="title" placeholder="Your Questions Title">
+                                        <input type="text" class="form-control center" name="title" id="title" placeholder="Your Questions Title" required>
                                     </div><br>
                                     <div class="form-group">
-                                        <textarea class="form-control center" id="descrip" name="descrip" rows="3" placeholder="Your Question Description"></textarea>
+                                        <textarea class="form-control center" id="descrip" name="descrip" rows="3" placeholder="Your Question Description" required></textarea>
                                       </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control center box" name="category" id="category" placeholder="Add Questions Category (coding, JavaScript)">
                                     </div>
                                     <p>Your Question Files</p>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <input type="file" class="custom-file-input" id="customFile" name="image">
                                         <label class="custom-file-label box" for="customFile">Choose file</label>
                                     </div>
+                                    <br><br>
+                                    <button type="submit" name ="create" class="btn btn-outline-primary tombol"><img src="../../Public/assets/img/send-black-18dp.svg" alt="send"> Post</button>
                                 </form>
-                                <br><button type="button" class="btn btn-outline-primary tombol"><a href="public_questions.php"><img src="../../Public/assets/img/send-black-18dp.svg" alt="send"> Post</a></button>
+                                
                             </div>
                         </li>
                     </ul>
