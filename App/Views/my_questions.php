@@ -3,14 +3,6 @@ include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 include("../CRUD/session.php");
 
-
-// ambil data user
-$user = [
-    "username" => $_SESSION['username'],
-    "id" => $_SESSION['id'],
-    "role" => $_SESSION['role']
-];
-
 // tombol search
 if( isset($_GET['search']) && !empty($_GET['search']) ){
     $keyword = $_GET['search'];
@@ -33,7 +25,7 @@ if( isset($_GET['page']) ){
     $curPage = 0;
 }
 
-$judul = "My Question";
+$judul = "My Questions";
 ?>
 
 <!doctype html>

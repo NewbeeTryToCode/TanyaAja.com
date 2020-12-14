@@ -2,7 +2,6 @@
 include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 include("../CRUD/session.php");
-session_start();
 
 // tombol search
 if( isset($_GET['search']) && !empty($_GET['search']) ){

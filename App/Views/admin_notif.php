@@ -1,5 +1,9 @@
 <?php 
-$judul = "Admin Notification"
+include("../CRUD/konek.db.php");
+include('../CRUD/Question/functions.php');
+include("../CRUD/session.php");
+
+$judul = "Admin Notifications"
 ?>
 
 <!doctype html>
@@ -18,7 +22,7 @@ $judul = "Admin Notification"
 
     <!-- My Styles -->
     <link rel="stylesheet" href="../../Public/assets/css/side_navbar.css">
-    <link rel="stylesheet" href="../../Public/assets/css/publicq.css">
+    <link rel="stylesheet" href="../../Public/assets/css/publicq.css?v=<?php echo time();?>">
 
     <title>Notification</title>
   </head>
@@ -41,7 +45,7 @@ $judul = "Admin Notification"
                 <div class="container-fluid mt-3 p-4">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item abu" id="filterNav">
-                            <h5 class="q-count">280,756 Questions</h5>
+                            <h5 class="q-count">280,756 Notifications</h5>
                             <span class="filter-item">
                                 <form class="form-inline">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
