@@ -115,40 +115,37 @@ $judul = "Questions Detail"
 
                 <!-- answer -->
                 <?php if( count($answers) > 0 ) : ?>
-                    <div class="container shadow rounded-lg answers">
-
-                        <?php foreach( $answers as $answer ) : ?>
-                            <div>
-                                <p class="coklat"><?php echo $answer['description']; ?></p>
-                                <!-- image -->
-                                <?php if( $answer['image'] != "no image" && !empty($answer['image'])) : ?>
-                                    <div class="imageContainer">
-                                        <img src="../CRUD/Question/img/<?php echo $answer['image'];?>" alt="gambar">
-                                    </div>
-                                <?php endif; ?>
+                    <?php foreach( $answers as $answer ) : ?>
+                        <div class="container shadow rounded-lg answers mt-5">
+                            <p class="coklat"><?php echo $answer['description']; ?></p>
+                            <!-- image -->
+                            <?php if( $answer['image'] != "no image" && !empty($answer['image'])) : ?>
+                                <div class="imageContainer">
+                                    <img src="../CRUD/Question/img/<?php echo $answer['image'];?>" alt="gambar">
+                                </div>
+                            <?php endif; ?>
+                            <div class="categories">
+                                <span class="profile">
+                                    <img src="../../Public/assets/img/profil.jpg" alt="">
+                                    <p class="ungu">Nathalie</p>
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="container">
+                                <p class="coklat">I love you gek iluh!!</p>
                                 <div class="categories">
                                     <span class="profile">
                                         <img src="../../Public/assets/img/profil.jpg" alt="">
                                         <p class="ungu">Nathalie</p>
                                     </span>
                                 </div>
-                                <hr>
-                                <div class="container">
-                                    <p class="coklat">I love you gek iluh!!</p>
-                                    <div class="categories">
-                                        <span class="profile">
-                                            <img src="../../Public/assets/img/profil.jpg" alt="">
-                                            <p class="ungu">Nathalie</p>
-                                        </span>
-                                    </div>
-                                </div>
-                                <form action="#">
-                                    <input type="text" class="abu" id="replyInput" placeholder="add reply">
-                                    <button name="reply" class="shadow-sm">reply</button>
-                                </form>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
+                            <form action="#">
+                                <input type="text" class="abu" id="replyInput" placeholder="add reply">
+                                <button name="reply" class="shadow-sm">reply</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
                 <?php else : ?>
                     <div class="container noAnswers">No Answer</div>
                 <?php endif; ?>
