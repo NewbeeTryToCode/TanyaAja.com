@@ -152,6 +152,7 @@ $judul = "Public Questions";
                            
                         </ul>
                     </div>
+                    <!-- Pagination -->
                 </div>
             </div>
             <!-- main content -->

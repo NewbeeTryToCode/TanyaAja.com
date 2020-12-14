@@ -13,7 +13,19 @@ $user = [
 
 // ambil pertanyaan dari user yang login
 $questions = get_all_byId("questions", "user_id", $user['id']);
+$pagination = get_pagination($questions);
 
+// pagination
+if( isset($_GET['page']) ){
+    // cek apakah angka
+    if( is_numeric($_GET['page']) && intval($_GET['page']) > 0){
+        $curPage=$_GET['page'] - 1;
+    }else{
+        $curPage = 0;
+    }
+}else{
+    $curPage = 0;
+}
 
 $judul = "My Question";
 ?>
@@ -74,16 +86,17 @@ $judul = "My Question";
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
-                        <?php foreach( $questions as $question ) : ?>
+                        <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
+                        <?php for( $pos = $start; $pos <= $end; $pos++ ) : ?>
                             <li class="list-group-item abu">
                                 <div class="questionsContainer">
                                     <div class="dateTime">
-                                        <?php $date = date_create($question['updated_at']);?>
+                                        <?php $date = date_create($questions[$pos]['updated_at']);?>
                                         <pre><?php echo date_format($date,"d M Y") ?></pre>
                                     </div>
-                                    <a href="./detail_questions.php?id=<?php echo $question['id'];?>" class="title"><h4><?php echo $question['title'] ?></h4></a>
+                                    <a href="./detail_questions.php?id=<?php echo $questions[$pos]['id'];?>" class="title"><h4><?php echo $questions[$pos]['title'] ?></h4></a>
                                     <p class="description">
-                                        <?php $paragraf = limit_text($question['description'], 25); echo $paragraf ?>
+                                        <?php $paragraf = limit_text($questions[$pos]['description'], 25); echo $paragraf ?>
                                     </p>
                                     <div class="categories">
                                         <span class="profile">
@@ -91,7 +104,7 @@ $judul = "My Question";
                                             <p class="ungu">Nathalie</p>
                                         </span>
                                         <!-- categories -->
-                                        <?php $categories = get_all_byId("categories", "question_id", $question["id"]);?>
+                                        <?php $categories = get_all_byId("categories", "question_id", $questions[$pos]["id"]);?>
                                         <?php foreach($categories as $category) : ?>
                                             <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
                                         <?php endforeach; ?>
@@ -114,37 +127,50 @@ $judul = "My Question";
                                         </div>
                                         <div class="crudicon">
                                             <span class="shadow-sm">
-                                                <a href="./edit_question.php?id=<?php echo $question['id'];?>"><i class="fas fa-pen biru"></i></a>
+                                                <a href="./edit_question.php?id=<?php echo $questions[$pos]['id'];?>"><i class="fas fa-pen biru"></i></a>
                                             </span>
                                             <span class="shadow-sm">
-                                                <a href="../CRUD/Question/delete.php?id=<?php echo $question['id'];?>"><i class="far fa-trash-alt red"></i></a>
+                                                <a href="../CRUD/Question/delete.php?id=<?php echo $questions[$pos]['id'];?>"><i class="far fa-trash-alt red"></i></a>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
                             </li>
-                        <?php endforeach; ?>
+                        <?php endfor; ?>
                     </ul>
 
                     <!-- Pagination -->
                     <div class="pageContainer">
                         <ul class="pagination shadow-sm">
-                            <li class="page-item">
-                                <a class="page-link abu" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link abu" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link abu" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link abu" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link abu" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
+                            <!-- prev -->
+                            <?php if( $curPage > 0 ) : ?>
+                                <li class="page-item">
+                                    <a class="page-link abu" href="./my_questions.php?page=<?php echo $curPage ?>" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <!-- prev -->
+
+                            <?php foreach( $pagination as $pos => $page ) :  ?>
+                                <li class="page-item"><a class="page-link abu <?php if($pos == $curPage) echo "bold"; ?>" href="./my_questions.php?page=<?php echo $pos + 1 ?>"><?php echo $pos + 1 ?></a></li>
+                            <?php endforeach; ?>
+
+                            <!-- next -->
+                            <?php if( $curPage != count($pagination) - 1 ) : ?>
+                                <li class="page-item">
+                                    <a class="page-link abu" href="./my_questions.php?page=<?php echo $curPage + 2 ?>" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <!-- next -->
+
+                           
                         </ul>
                     </div>
+                    <!-- Pagination -->
                 </div>
             </div>
             <!-- main content -->

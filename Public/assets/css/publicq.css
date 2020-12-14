@@ -109,3 +109,8 @@
     margin-left: 10px;
     color: rgb(0, 0, 124);
 }
+
+.bold{
+    font-weight: bold;
+    color: rgb(0, 0, 180);
+}
