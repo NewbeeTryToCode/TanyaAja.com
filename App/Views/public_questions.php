@@ -1,6 +1,7 @@
 <?php 
 include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
+include("../CRUD/session.php");
 session_start();
 
 // tombol search
