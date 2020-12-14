@@ -34,7 +34,7 @@ $judul = "My Question";
 
     <!-- My Styles -->
     <link rel="stylesheet" href="../../Public/assets/css/side_navbar.css">
-    <link rel="stylesheet" href="../../Public/assets/css/publicq.css">
+    <link rel="stylesheet" href="../../Public/assets/css/publicq.css?v=<?php echo time();?>">
     <link rel="stylesheet" href="../../Public/assets/css/myQuestions.css">
 
     <title>My Questions</title>
@@ -77,6 +77,10 @@ $judul = "My Question";
                         <?php foreach( $questions as $question ) : ?>
                             <li class="list-group-item abu">
                                 <div class="questionsContainer">
+                                    <div class="dateTime">
+                                        <?php $date = date_create($question['updated_at']);?>
+                                        <pre><?php echo date_format($date,"d M Y") ?></pre>
+                                    </div>
                                     <a href="./detail_questions.php?id=<?php echo $question['id'];?>" class="title"><h4><?php echo $question['title'] ?></h4></a>
                                     <p class="description">
                                         <?php $paragraf = limit_text($question['description'], 25); echo $paragraf ?>

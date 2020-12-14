@@ -53,7 +53,7 @@ $judul = "Questions Detail"
 
     <!-- My Styles -->
     <link rel="stylesheet" href="../../Public/assets/css/side_navbar.css">
-    <link rel="stylesheet" href="../../Public/assets/css/publicq.css">
+    <link rel="stylesheet" href="../../Public/assets/css/publicq.css?v=<?php echo time();?>">
     <link rel="stylesheet" href="../../Public/assets/css/detail.css?v=<?php echo time();?>">
 
     <title>Questions Detail</title>
@@ -73,44 +73,48 @@ $judul = "Questions Detail"
             <!-- Nav Bar -->
 
             <!-- main content -->
-            <div class="container-fluid abu mt-3 p-4">
+            <div class="container-fluid abu mt-3 p-3">
                 <!-- question -->
                 <div class="container shadow rounded-lg questions">
+                    <div class="dateTime">
+                        <?php $date = date_create($question['updated_at']);?>
+                        <pre><?php echo date_format($date,"d M Y") ?></pre>
+                    </div>
                     <a href="" class="title"><h4><?php echo $question['title']; ?></h4></a>
-                        <p class="coklat"><?php echo $question['description']; ?></p>
-                        <!-- image -->
-                        <?php if( $question['image'] != "no image" && !empty($question['image'])) : ?>
-                            <div class="imageContainer">
-                                <img src="../CRUD/Question/img/<?php echo $question['image'];?>" alt="gambar">
-                            </div>
-                        <?php endif; ?>
-                        <div class="categories">
-                            <span class="profile">
-                                <img src="../../Public/assets/img/profil.jpg" alt="">
-                                <p class="ungu">Nathalie</p>
-                            </span>
-                            <span class="categoriesContainer">
-                                <!-- categories -->
-                                <?php $categories = get_all_byId("categories", "question_id", $question["id"]);?>
-                                <?php foreach($categories as $category) : ?>
-                                    <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
-                                <?php endforeach; ?>
-                            </span>
+                    <p class="coklat"><?php echo $question['description']; ?></p>
+                    <!-- image -->
+                    <?php if( $question['image'] != "no image" && !empty($question['image'])) : ?>
+                        <div class="imageContainer">
+                            <img src="../CRUD/Question/img/<?php echo $question['image'];?>" alt="gambar">
                         </div>
-                        <div class="icons">
-                            <span class="shadow-sm">
-                                <i class="far fa-eye"></i>
-                                <p>7</p>
-                            </span>
-                            <span class="shadow-sm">
-                                <i class="far fa-check-circle"></i>
-                                <p class="green">7</p>
-                            </span>
-                            <span class="shadow-sm">
-                                <i class="far fa-check-square"></i>
-                                <p class="red">7</p>
-                            </span>
-                        </div>
+                    <?php endif; ?>
+                    <div class="categories">
+                        <span class="profile">
+                            <img src="../../Public/assets/img/profil.jpg" alt="">
+                            <p class="ungu">Nathalie</p>
+                        </span>
+                        <span class="categoriesContainer">
+                            <!-- categories -->
+                            <?php $categories = get_all_byId("categories", "question_id", $question["id"]);?>
+                            <?php foreach($categories as $category) : ?>
+                                <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
+                            <?php endforeach; ?>
+                        </span>
+                    </div>
+                    <div class="icons">
+                        <span class="shadow-sm">
+                            <i class="far fa-eye"></i>
+                            <p>7</p>
+                        </span>
+                        <span class="shadow-sm">
+                            <i class="far fa-check-circle"></i>
+                            <p class="green">7</p>
+                        </span>
+                        <span class="shadow-sm">
+                            <i class="far fa-check-square"></i>
+                            <p class="red">7</p>
+                        </span>
+                    </div>
                 </div>
                 <!-- question -->
 
@@ -122,7 +126,11 @@ $judul = "Questions Detail"
                 <?php if( count($answers) > 0 ) : ?>
                     <?php foreach( $answers as $answer ) : ?>
                         <div class="container shadow rounded-lg answers mt-5">
-                            <p class="coklat"><?php echo $answer['description']; ?></p>
+                            <div class="dateTime">
+                                <?php $date = date_create($answer['updated_at']);?>
+                                <pre><?php echo date_format($date,"d M Y") ?></pre>
+                            </div>
+                            <p class="coklat mt-2"><?php echo $answer['description']; ?></p>
                             <!-- image -->
                             <?php if( $answer['image'] != "no image" && !empty($answer['image'])) : ?>
                                 <div class="imageContainer">
@@ -146,7 +154,11 @@ $judul = "Questions Detail"
                                 <div class="profileContainer">
                                     <span class="profile">
                                         <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
+                                        <?php $date = date_create($reply['updated_at']);?>
+                                        <span>
+                                            <p class="ungu">Nathalie</p>
+                                            <pre class="dateTime replies"><?php echo " - " . date_format($date,"d M Y") ?></pre>
+                                        </span>
                                     </span>
                                 </div>
                             </div>
@@ -172,7 +184,7 @@ $judul = "Questions Detail"
                 </div>
 
                 <!-- your answer -->
-                <div class="container shadow rounded-lg yourAnswer" >
+                <div class="container shadow rounded-lg yourAnswer mt-4" >
                     <form action="./detail_questions.php?id=<?php echo $question['id'];?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="question_id" value="<?php echo $question['id'];?>">
                         <label for="foto">Add your image here</label><br>

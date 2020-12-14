@@ -17,7 +17,7 @@
 }
 
 .questions, .answers, .yourAnswer{
-    padding:40px;
+    padding:30px;
 }
 
 .answerTitle{
@@ -76,4 +76,10 @@ button[name=reply]:hover, button[name=post]:hover{
 .noAnswers{
     font-size: 20px;
     color: grey;
+}
+
+.profile span{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
