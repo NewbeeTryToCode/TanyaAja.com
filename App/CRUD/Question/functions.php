@@ -10,8 +10,8 @@ function delete_byId($table, $column, $id){
 
 }
 
-function delete_file($filename){
-	$path = "img/" . $filename;
+function delete_file($path, $filename){
+	$path = $path . $filename;
     return unlink($path);
 }
 
@@ -75,6 +75,7 @@ function update_question($data){
 		$image = $old_image;
 	}else{
 		$image= upload();
+		delete_file("../CRUD/Question/img/", $old_image);
 	}
 	
 

@@ -14,7 +14,7 @@ if(isset($_POST['delete'])){
     // hapus balasan dan gambar jawaban
     foreach($answers as $answer){
         delete_byId("replies", "answer_id", $answer['id']);
-        delete_file($answer['image']);
+        delete_file("img/", $answer['image']);
     }
 
     // hapus jawaban
@@ -26,7 +26,7 @@ if(isset($_POST['delete'])){
     // hapus
     if(delete_byId("questions", "id", $id) > 0){
 
-        delete_file( $question['image']);
+        delete_file("img/", $question['image']);
         echo " 
                 <script> 
                     alert('data berhasil dihapus'); 

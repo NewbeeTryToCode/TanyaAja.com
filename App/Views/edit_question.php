@@ -5,7 +5,7 @@ include("../CRUD/session.php");
 
 // tombol tambah
 if( isset($_POST['update']) ){
-
+    
     // validasi input
     if (update_question($_POST) > 0){
 		echo "
