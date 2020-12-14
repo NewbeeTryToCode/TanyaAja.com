@@ -11,11 +11,17 @@ $user = [
     "role" => $_SESSION['role']
 ];
 
-// ambil pertanyaan dari user yang login
-$questions = get_all_byId("questions", "user_id", $user['id']);
-$pagination = get_pagination($questions);
+// tombol search
+if( isset($_GET['search']) && !empty($_GET['search']) ){
+    $keyword = $_GET['search'];
+    $questions = get_search_data_withId($keyword, $user['id']);
+}else{
+    // ambil pertanyaan dari user yang login
+    $questions = get_all_byId("questions", "user_id", $user['id']);
+}
 
 // pagination
+$pagination = get_pagination($questions);
 if( isset($_GET['page']) ){
     // cek apakah angka
     if( is_numeric($_GET['page']) && intval($_GET['page']) > 0){
@@ -76,71 +82,77 @@ $judul = "My Question";
                                 <h5 class="q-count">No Questions</h5>
                             <?php endif; ?>
                             <span class="filter-item">
-                                <form class="form-inline">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                               <!-- searching -->
+                               <form class="form-inline" action="./my_questions.php" method="GET">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" value="<?php if(isset($keyword)) echo $keyword;?>">
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
+                                <!-- searching -->
                                 <span class="filter-category shadow-sm biru"><a href="">Newest</a></span>
                                 <span class="filter-category shadow-sm biru"><a href="">Hot</a></span>
                                 <span class="filter-category shadow-sm biru"><a href="">Unanswered</a></span>
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
-                        <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
-                        <?php for( $pos = $start; $pos <= $end; $pos++ ) : ?>
-                            <li class="list-group-item abu">
-                                <div class="questionsContainer">
-                                    <div class="dateTime">
-                                        <?php $date = date_create($questions[$pos]['updated_at']);?>
-                                        <pre><?php echo date_format($date,"d M Y") ?></pre>
-                                    </div>
-                                    <a href="./detail_questions.php?id=<?php echo $questions[$pos]['id'];?>" class="title"><h4><?php echo $questions[$pos]['title'] ?></h4></a>
-                                    <p class="description">
-                                        <?php $paragraf = limit_text($questions[$pos]['description'], 25); echo $paragraf ?>
-                                    </p>
-                                    <div class="categories">
-                                        <span class="profile">
-                                            <img src="../../Public/assets/img/profil.jpg" alt="">
-                                            <p class="ungu">Nathalie</p>
-                                        </span>
-                                        <!-- categories -->
-                                        <?php $categories = get_all_byId("categories", "question_id", $questions[$pos]["id"]);?>
-                                        <?php foreach($categories as $category) : ?>
-                                            <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
-                                        <?php endforeach; ?>
-                                        <!-- categories -->
-                                    </div>
-                                    <div class="icons">
-                                        <div class="nocrudicon">
-                                            <span class="shadow-sm">
-                                                <i class="far fa-eye"></i>
-                                                <p>7</p>
-                                            </span>
-                                            <span class="shadow-sm">
-                                                <i class="far fa-check-circle"></i>
-                                                <p class="green">7</p>
-                                            </span>
-                                            <span class="shadow-sm">
-                                                <i class="far fa-check-square"></i>
-                                                <p class="red">7</p>
-                                            </span>
+                        <!-- questions -->
+                        <?php if(count($questions) > 0) :  ?>
+                            <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
+                            <?php for( $pos = $start; $pos <= $end; $pos++ ) : ?>
+                                <li class="list-group-item abu">
+                                    <div class="questionsContainer">
+                                        <div class="dateTime">
+                                            <?php $date = date_create($questions[$pos]['updated_at']);?>
+                                            <pre><?php echo date_format($date,"d M Y") ?></pre>
                                         </div>
-                                        <div class="crudicon">
-                                            <span class="shadow-sm">
-                                                <a href="./edit_question.php?id=<?php echo $questions[$pos]['id'];?>"><i class="fas fa-pen biru"></i></a>
+                                        <a href="./detail_questions.php?id=<?php echo $questions[$pos]['id'];?>" class="title"><h4><?php echo $questions[$pos]['title'] ?></h4></a>
+                                        <p class="description">
+                                            <?php $paragraf = limit_text($questions[$pos]['description'], 25); echo $paragraf ?>
+                                        </p>
+                                        <div class="categories">
+                                            <span class="profile">
+                                                <img src="../../Public/assets/img/profil.jpg" alt="">
+                                                <p class="ungu">Nathalie</p>
                                             </span>
-                                            <span class="shadow-sm">
-                                                <form action="../CRUD/Question/delete.php" method="POST">
-                                                    <input type="hidden" name="id" value="<?php echo $questions[$pos]['id'];?>">
-                                                    <button name="delete" type="submit" style="border:none;"><a href=""><i class="far fa-trash-alt red"></a></i></button>
-                                                </form>
-                                            </span>
+                                            <!-- categories -->
+                                            <?php $categories = get_all_byId("categories", "question_id", $questions[$pos]["id"]);?>
+                                            <?php foreach($categories as $category) : ?>
+                                                <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
+                                            <?php endforeach; ?>
+                                            <!-- categories -->
+                                        </div>
+                                        <div class="icons">
+                                            <div class="nocrudicon">
+                                                <span class="shadow-sm">
+                                                    <i class="far fa-eye"></i>
+                                                    <p>7</p>
+                                                </span>
+                                                <span class="shadow-sm">
+                                                    <i class="far fa-check-circle"></i>
+                                                    <p class="green">7</p>
+                                                </span>
+                                                <span class="shadow-sm">
+                                                    <i class="far fa-check-square"></i>
+                                                    <p class="red">7</p>
+                                                </span>
+                                            </div>
+                                            <div class="crudicon">
+                                                <span class="shadow-sm">
+                                                    <a href="./edit_question.php?id=<?php echo $questions[$pos]['id'];?>"><i class="fas fa-pen biru"></i></a>
+                                                </span>
+                                                <span class="shadow-sm">
+                                                    <form action="../CRUD/Question/delete.php" method="POST">
+                                                        <input type="hidden" name="id" value="<?php echo $questions[$pos]['id'];?>">
+                                                        <button name="delete" type="submit" style="border:none;"><a href=""><i class="far fa-trash-alt red"></a></i></button>
+                                                    </form>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <br>
-                            </li>
-                        <?php endfor; ?>
+                                    <br>
+                                </li>
+                            <?php endfor; ?>
+                        <?php endif; ?>
+                        <!-- questions -->
                     </ul>
 
                     <!-- Pagination -->
@@ -161,7 +173,7 @@ $judul = "My Question";
                             <?php endforeach; ?>
 
                             <!-- next -->
-                            <?php if( $curPage != count($pagination) - 1 ) : ?>
+                            <?php if( $curPage != count($pagination) - 1 && count($questions) > 0 ) : ?>
                                 <li class="page-item">
                                     <a class="page-link abu" href="./my_questions.php?page=<?php echo $curPage + 2 ?>" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>

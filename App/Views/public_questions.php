@@ -3,10 +3,16 @@ include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 session_start();
 
-$questions = get_all("questions");
-$pagination = get_pagination($questions);
+// tombol search
+if( isset($_GET['search']) && !empty($_GET['search']) ){
+    $keyword = $_GET['search'];
+    $questions = get_search_data($keyword);
+}else{
+    $questions = get_all("questions");
+}
 
 // pagination
+$pagination = get_pagination($questions);
 if( isset($_GET['page']) ){
     // cek apakah angka
     if( is_numeric($_GET['page']) && intval($_GET['page']) > 0){
@@ -66,16 +72,19 @@ $judul = "Public Questions";
                                 <h5 class="q-count">No Questions</h5>
                             <?php endif; ?>
                             <span class="filter-item">
-                                <form class="form-inline">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                <!-- searching -->
+                                <form class="form-inline" action="./public_questions.php" method="GET">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" value="<?php if(isset($keyword)) echo $keyword;?>">
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
+                                <!-- searching -->
                                 <span class="filter-category shadow-sm biru"><a href="">Newest</a></span>
                                 <span class="filter-category shadow-sm biru"><a href="">Hot</a></span>
                                 <span class="filter-category shadow-sm biru"><a href="">Unanswered</a></span>
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
+                        <!-- questions -->
                         <?php if(count($questions) > 0) :  ?>
                             <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
                             <?php for( $pos = $start; $pos <= $end; $pos++ ) : ?>
@@ -120,6 +129,7 @@ $judul = "Public Questions";
                                 </li>
                             <?php endfor; ?>
                         <?php endif; ?>
+                        <!-- questions -->
                     </ul>
 
                     <!-- Pagination -->
@@ -140,7 +150,7 @@ $judul = "Public Questions";
                             <?php endforeach; ?>
 
                             <!-- next -->
-                            <?php if( $curPage != count($pagination) - 1 ) : ?>
+                            <?php if( $curPage != count($pagination) - 1 && count($questions) > 0) : ?>
                                 <li class="page-item">
                                     <a class="page-link abu" href="./public_questions.php?page=<?php echo $curPage + 2 ?>" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>

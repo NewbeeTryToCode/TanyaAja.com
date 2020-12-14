@@ -216,6 +216,40 @@ function insert_reply($data){
 }
 
 // fungsi sql
+function get_search_data($keyword){
+
+	global $conn;
+	$query = "SELECT question_id as id, title, description, username, name as catName, q.updated_at FROM 
+				questions q INNER JOIN categories c ON q.id = c.question_id
+				INNER JOIN users u ON q.user_id = u.id
+				WHERE
+				q.title LIKE \"%$keyword%\" OR
+				q.description LIKE \"%$keyword%\" OR
+				u.username LIKE \"%$keyword%\" OR
+				c.name LIKE \"%$keyword%\"
+				GROUP BY id ORDER BY updated_at DESC; 
+			";
+	$result = mysqli_query($conn, $query);
+    return get_data($result);
+}
+
+function get_search_data_withId($keyword, $user_id){
+
+	global $conn;
+	$query = "SELECT question_id as id, title, description, username, name as catName, q.updated_at, user_id FROM 
+				questions q INNER JOIN categories c ON q.id = c.question_id
+				INNER JOIN users u ON q.user_id = u.id
+				WHERE
+				(q.title LIKE \"%$keyword%\" OR
+				q.description LIKE \"%$keyword%\" OR
+				u.username LIKE \"%$keyword%\" OR
+				c.name LIKE \"%$keyword%\") AND q.user_id = $user_id
+				GROUP BY id ORDER BY updated_at DESC; 
+			";
+	$result = mysqli_query($conn, $query);
+    return get_data($result);
+}
+
 function get_all_byId_withJoin($table1, $table2, $onkey1, $onkey2, $id){
 
 	global $conn;
