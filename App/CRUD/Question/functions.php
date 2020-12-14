@@ -166,6 +166,31 @@ function get_data($result){
     return $rows;
 }
 
+function insert_answer($data){
+
+    global $conn;
+    $user_id = $_SESSION['id'];
+
+	// ambil data dari tiap elemen dalam form
+	// htmlspecialchars() digunakan untuk membedakan script html, agar user tidak bisa menulis script html pada pengisian data
+	$descrip = htmlspecialchars($data["yAnswerDesc"]);
+	$question_id = $data["question_id"];
+    $created_at = $updated_at = date('Y-m-d H:i:s');
+    
+    
+	// uplod gambar
+	$image = upload(); //nilai yang ingin dibalikan nantinya berupa nama file gambar, agar nama file bisa dimasukan ke database
+	if ( !$image ){
+		return false;
+	}
+
+	// query insert data
+	$query = "INSERT INTO answers VALUES ('', \"$descrip\", \"$image\", '$created_at', '$updated_at', $user_id, $question_id);";
+
+	$result = mysqli_query($conn, $query);
+	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
+}
+
 // fungsi sql
 function get_all_byId_withJoin($table1, $table2, $onkey1, $onkey2, $id){
 

@@ -28,19 +28,27 @@ if( isset($_POST['update']) ){
 }
 
 // id pertanyaan
-if( isset($_GET['id']) ){
+if( isset($_GET['id']) && !empty($_GET['id']) ){
 
     // ambil id pertanyaan
     $id = $_GET['id'];
 
     // ambil data pertanyaan
     $question = get_all_byId("questions", "id", $id)[0];
+    if( !$question ){
+        header("Location:my_questions.php");
+        exit;
+    }
 
     // ambil kategori
     $categories = get_all_byId("categories", "question_id", $question['id']);
     $categories = implode(', ', array_column($categories, 'name'));
 
+}else{
+    header("Location:my_questions.php");
+    exit;
 }
+
 
 $judul = "Edit Question"
 ?>

@@ -73,3 +73,8 @@ button[name=reply]:hover, button[name=post]:hover{
     flex-direction: row;
     justify-content: flex-end;
 }
+
+.noAnswers{
+    font-size: 20px;
+    color: grey;
+}

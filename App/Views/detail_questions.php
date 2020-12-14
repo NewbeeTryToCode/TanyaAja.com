@@ -3,14 +3,30 @@ include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 include("../CRUD/session.php");
 
+
+if( isset($_POST['post']) ){
+
+    // masukan jawaban ke database
+    insert_answer($_POST);
+}
+
 // id pertanyaan
-if( isset($_GET['id']) ){
+if( isset($_GET['id']) && !empty($_GET['id']) ){
 
     // ambil id pertanyaan
     $id = $_GET['id'];
 
     // ambil data pertanyaan
     $question = get_all_byId("questions", "id", $id)[0];
+    if( !$question ){
+        header("Location:public_questions.php");
+        exit;
+    }
+    // ambil data semua jawaban
+    $answers = get_all_byId("answers", "question_id", $id);
+}else{
+    header("Location:public_questions.php");
+    exit;
 }
 
 $judul = "Questions Detail"
@@ -94,34 +110,48 @@ $judul = "Questions Detail"
                 <!-- question -->
 
                 <div class="container answerTitle">
-                    <h3>Answer</h3>
+                    <h3>Answers</h3>
                 </div>
 
                 <!-- answer -->
-                <div class="container shadow rounded-lg answers">
-                    <p class="coklat">I dont know how to fix it but fighting!!! </p>
-                    <div class="categories">
-                        <span class="profile">
-                            <img src="../../Public/assets/img/profil.jpg" alt="">
-                            <p class="ungu">Nathalie</p>
-                        </span>
+                <?php if( count($answers) > 0 ) : ?>
+                    <div class="container shadow rounded-lg answers">
+
+                        <?php foreach( $answers as $answer ) : ?>
+                            <div>
+                                <p class="coklat"><?php echo $answer['description']; ?></p>
+                                <!-- image -->
+                                <?php if( $answer['image'] != "no image" && !empty($answer['image'])) : ?>
+                                    <div class="imageContainer">
+                                        <img src="../CRUD/Question/img/<?php echo $answer['image'];?>" alt="gambar">
+                                    </div>
+                                <?php endif; ?>
+                                <div class="categories">
+                                    <span class="profile">
+                                        <img src="../../Public/assets/img/profil.jpg" alt="">
+                                        <p class="ungu">Nathalie</p>
+                                    </span>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <p class="coklat">I love you gek iluh!!</p>
+                                    <div class="categories">
+                                        <span class="profile">
+                                            <img src="../../Public/assets/img/profil.jpg" alt="">
+                                            <p class="ungu">Nathalie</p>
+                                        </span>
+                                    </div>
+                                </div>
+                                <form action="#">
+                                    <input type="text" class="abu" id="replyInput" placeholder="add reply">
+                                    <button name="reply" class="shadow-sm">reply</button>
+                                </form>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                    <hr>
-                    <div class="container">
-                        <p class="coklat">I love you gek iluh!!</p>
-                        <div class="categories">
-                            <span class="profile">
-                                <img src="../../Public/assets/img/profil.jpg" alt="">
-                                <p class="ungu">Nathalie</p>
-                            </span>
-                        </div>
-                    </div>
-                    <form action="#">
-                        <input type="text" class="abu" id="replyInput" placeholder="add reply">
-                        <button name="reply" class="shadow-sm">reply</button>
-                    </form>
-                    
-                </div>
+                <?php else : ?>
+                    <div class="container noAnswers">No Answer</div>
+                <?php endif; ?>
                 <!-- answer -->
 
                 <div class="container answerTitle">
@@ -129,10 +159,11 @@ $judul = "Questions Detail"
                 </div>
 
                 <!-- your answer -->
-                <div class="container shadow rounded-lg yourAnswer">
-                    <form action="">
+                <div class="container shadow rounded-lg yourAnswer" >
+                    <form action="./detail_questions.php?id=<?php echo $question['id'];?>" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="question_id" value="<?php echo $question['id'];?>">
                         <label for="foto">Add your image here</label><br>
-                        <input type="file" id="foto">
+                        <input type="file" id="foto" name="image">
                         <hr>
                         <textarea name="yAnswerDesc" id="" cols="30" rows="5" placeholder="Add your answer here" class="abu ansText">I think..</textarea>
                         <br><br>
