@@ -130,7 +130,10 @@ $judul = "My Question";
                                                 <a href="./edit_question.php?id=<?php echo $questions[$pos]['id'];?>"><i class="fas fa-pen biru"></i></a>
                                             </span>
                                             <span class="shadow-sm">
-                                                <a href="../CRUD/Question/delete.php?id=<?php echo $questions[$pos]['id'];?>"><i class="far fa-trash-alt red"></i></a>
+                                                <form action="../CRUD/Question/delete.php" method="POST">
+                                                    <input type="hidden" name="id" value="<?php echo $questions[$pos]['id'];?>">
+                                                    <button name="delete" type="submit" style="border:none;"><a href=""><i class="far fa-trash-alt red"></a></i></button>
+                                                </form>
                                             </span>
                                         </div>
                                     </div>

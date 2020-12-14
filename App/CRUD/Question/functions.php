@@ -4,10 +4,15 @@ function delete_byId($table, $column, $id){
 
 	global $conn;
     $query = "DELETE FROM $table WHERE $column =" . $id;
-    $result = mysqli_query($conn, $query);
+	$result = mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
 
+}
+
+function delete_file($filename){
+	$path = "img/" . $filename;
+    return unlink($path);
 }
 
 function insert_qustion($data){
