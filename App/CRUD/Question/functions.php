@@ -255,5 +255,31 @@ function limit_text($text, $limit) {
     return $text;
 }
 
+// pagination
+function get_pagination($data){
+	$start_page = 0;
+	$data_len = count($data);
+	$data_per_page = 5;
+	$page_len = ceil($data_len/$data_per_page);
+	$pagination = [];
+
+	$remain_data = $data_len;
+	for($i = 0; $i < $page_len; $i++){
+
+		if( $remain_data < $data_per_page ){
+			$data_per_page = $remain_data;
+		}
+		$pagination[] = [
+			"start" => $start_page,
+			"end" => ($start_page + $data_per_page)-1
+		];
+
+		$start_page += $data_per_page;
+		$remain_data -= $data_per_page;
+	}
+
+	return $pagination;
+}
+
 
 ?>
