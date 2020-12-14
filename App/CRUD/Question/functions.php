@@ -191,6 +191,24 @@ function insert_answer($data){
 	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
 }
 
+function insert_reply($data){
+
+    global $conn;
+    $user_id = $_SESSION['id'];
+
+	// ambil data dari tiap elemen dalam form
+	// htmlspecialchars() digunakan untuk membedakan script html, agar user tidak bisa menulis script html pada pengisian data
+	$descrip = htmlspecialchars($data["replyInput"]);
+	$answer_id = $data["answer_id"];
+    $created_at = $updated_at = date('Y-m-d H:i:s');
+
+	// query insert data
+	$query = "INSERT INTO replies VALUES ('', \"$descrip\", '$created_at', '$updated_at', $user_id, $answer_id);";
+
+	$result = mysqli_query($conn, $query);
+	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
+}
+
 // fungsi sql
 function get_all_byId_withJoin($table1, $table2, $onkey1, $onkey2, $id){
 

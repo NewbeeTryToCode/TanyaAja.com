@@ -3,11 +3,16 @@ include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 include("../CRUD/session.php");
 
-
+// tombol post
 if( isset($_POST['post']) ){
-
     // masukan jawaban ke database
     insert_answer($_POST);
+}
+
+// tombol reply
+if ( isset($_POST['reply']) ){
+    // masukan balasan ke database
+    insert_reply($_POST);
 }
 
 // id pertanyaan
@@ -124,26 +129,37 @@ $judul = "Questions Detail"
                                     <img src="../CRUD/Question/img/<?php echo $answer['image'];?>" alt="gambar">
                                 </div>
                             <?php endif; ?>
-                            <div class="categories">
+                            <!-- image -->
+                            <div class="profileContainer">
                                 <span class="profile">
                                     <img src="../../Public/assets/img/profil.jpg" alt="">
                                     <p class="ungu">Nathalie</p>
                                 </span>
                             </div>
                             <hr>
+
+                            <!-- replies -->
+                            <?php $replies = get_all_byId("replies", "answer_id", $answer['id']); ?>
+                            <?php foreach( $replies as $reply ) : ?>
                             <div class="container">
-                                <p class="coklat">I love you gek iluh!!</p>
-                                <div class="categories">
+                                <p class="coklat"><?php echo $reply['description']; ?></p>
+                                <div class="profileContainer">
                                     <span class="profile">
                                         <img src="../../Public/assets/img/profil.jpg" alt="">
                                         <p class="ungu">Nathalie</p>
                                     </span>
                                 </div>
                             </div>
-                            <form action="#">
-                                <input type="text" class="abu" id="replyInput" placeholder="add reply">
-                                <button name="reply" class="shadow-sm">reply</button>
+                            <?php endforeach; ?>
+                            <!-- replies -->
+
+                            <!-- reply input-->
+                            <form action="./detail_questions.php?id=<?php echo $question['id'];?>" method="POST">
+                                <input type="hidden" name="answer_id" value="<?php echo $answer['id'];?>">
+                                <input type="text" class="abu" id="replyInput" placeholder="add reply" name="replyInput">
+                                <button type="submit" name="reply" class="shadow-sm">reply</button>
                             </form>
+                            <!-- reply input-->
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>

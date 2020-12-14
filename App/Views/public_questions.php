@@ -81,6 +81,7 @@ $judul = "Public Questions";
                                             <?php foreach($categories as $category) : ?>
                                                 <span class="categories-item shadow-sm ungu"><?php echo $category['name']; ?></span>
                                             <?php endforeach; ?>
+                                            <!-- categories -->
                                         </div>
                                         <div class="icons">
                                             <span class="shadow-sm">
