@@ -51,9 +51,6 @@ $judul = "Admin Notifications"
                                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
-                                <span class="filter-category shadow-sm biru"><a href="">Newest</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Hot</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Unanswered</a></span>
                                 <span class="add shadow-sm"><i class="fas fa-plus-circle"></i></span>
                             </span>
                         </li>

@@ -15,7 +15,7 @@ function delete_file($path, $filename){
     return unlink($path);
 }
 
-function insert_qustion($data){
+function insert_question($data){
 
     global $conn;
     $id = $_SESSION['id'];
@@ -53,9 +53,6 @@ function insert_qustion($data){
 			}
 			
 		}
-
-
-		mysqli_query($conn, $query);
 
 	}
     

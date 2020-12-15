@@ -3,10 +3,15 @@ include("../konek.db.php");
 include('./functions.php');
 include("../session.php");
 
-// ambil id pertanyaan
+if( $user['role'] == 'admin' ){
+    $redirect = 'admin_manage_question.php';
+}else{
+    $redirect = 'my_questions.php';
+}
 
 if(isset($_POST['delete'])){
 
+    // ambil id pertanyaan
     $id = $_POST['id'];
     $question = get_all_byId("questions", "id", $id)[0];
     $answers = get_all_byId("answers", "question_id", $question['id']);
@@ -36,14 +41,14 @@ if(isset($_POST['delete'])){
         echo " 
                 <script> 
                     alert('data berhasil dihapus'); 
-                    document.location.href = '../../Views/my_questions.php';
+                    document.location.href = '../../Views/$redirect';
                 </script> 
         ";
     }else{
         echo " 
             <script> 
                 alert('data gagal dihapus'); 
-                document.location.href = '../../Views/my_questions.php';
+                document.location.href = '../../Views/$redirect';
             </script> 
         ";
     }

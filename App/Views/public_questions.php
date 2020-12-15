@@ -25,6 +25,7 @@ elseif(isset($_GET['unanswered']) && !empty($_GET['unanswered'])){
 
 }else{
     $questions = get_all("questions", "DESC");
+    $add = "";
 }
 
 // pagination

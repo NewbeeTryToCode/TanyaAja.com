@@ -7,7 +7,7 @@ include("../CRUD/session.php");
 if( isset($_POST['create']) ){
 
     // validasi input
-    if (insert_qustion($_POST) > 0){
+    if (insert_question($_POST) > 0){
 		echo "
 			<script>
 				alert ('data berhasil ditambahkan');
