@@ -294,11 +294,37 @@ function get_max_id($table){
     return get_data($result)[0]["MAX(id)"];
 }
 
-function get_all($table){
+function get_all($table, $sort){
     global $conn;
-    $query = "SELECT * FROM $table ORDER BY id DESC";
+    $query = "SELECT * FROM $table ORDER BY id $sort";
     $result = mysqli_query($conn, $query);
 
+    return get_data($result);
+}
+
+function get_hot(){
+
+	global $conn;
+    $query = "SELECT q.id, COUNT(question_id) as jumlah, q.title, q.description, q.user_id, q.updated_at, u.username
+				FROM questions q INNER JOIN likes l
+				ON q.id = l.question_id 
+				INNER JOIN users u
+				ON u.id = q.user_id
+				GROUP BY l.question_id ORDER BY jumlah DESC
+			";
+    $result = mysqli_query($conn, $query);
+    return get_data($result);
+	
+}
+
+function get_unanswered(){
+	
+	global $conn;
+    $query = "SELECT * FROM questions q LEFT JOIN
+				(SELECT question_id, COUNT(question_id) as jumlah FROM answers GROUP BY question_id) n
+				ON q.id = n.question_id WHERE jumlah IS NULL
+			";
+    $result = mysqli_query($conn, $query);
     return get_data($result);
 }
 

@@ -80,9 +80,7 @@ $judul = "My Questions";
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
                                 <!-- searching -->
-                                <span class="filter-category shadow-sm biru"><a href="">Newest</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Hot</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Unanswered</a></span>
+                                
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
@@ -135,7 +133,7 @@ $judul = "My Questions";
                                                 // ambil jumlah likes
                                                     $likes = get_all_byId("likes", "question_id", $questions[$pos]["id"]);
                                                     if( count($likes) > 0 ){
-                                                        $likeCounts = count($views);
+                                                        $likeCounts = count($likes);
                                                     }else{
                                                         $likeCounts = 0;
                                                     }
@@ -223,13 +221,6 @@ $judul = "My Questions";
         
     </div>
     <!-- Wrapper -->
-
-    
-
-
-
-
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 

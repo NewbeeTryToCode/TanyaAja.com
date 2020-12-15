@@ -3,12 +3,28 @@ include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 include("../CRUD/session.php");
 
-// tombol search
+// tombol filter
 if( isset($_GET['search']) && !empty($_GET['search']) ){
     $keyword = $_GET['search'];
     $questions = get_search_data($keyword);
+    $add = "&search=$keyword";
+}elseif(isset($_GET['earliest']) && !empty($_GET['earliest'])){
+
+    $questions = get_all("questions", "ASC");
+    $add = "&earliest=true";
+
+}elseif(isset($_GET['hot']) && !empty($_GET['hot'])){
+
+    $questions = get_hot();
+    $add = "&hot=true";
+}
+elseif(isset($_GET['unanswered']) && !empty($_GET['unanswered'])){
+
+    $questions = get_unanswered();
+    $add = "&unanswered=true";
+
 }else{
-    $questions = get_all("questions");
+    $questions = get_all("questions", "DESC");
 }
 
 // pagination
@@ -78,9 +94,9 @@ $judul = "Public Questions";
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
                                 <!-- searching -->
-                                <span class="filter-category shadow-sm biru"><a href="">Newest</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Hot</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Unanswered</a></span>
+                                <span class="filter-category shadow-sm biru"><a href="./public_questions.php?earliest=true">Earliest</a></span>
+                                <span class="filter-category shadow-sm biru"><a href="./public_questions.php?hot=true">Hot</a></span>
+                                <span class="filter-category shadow-sm biru"><a href="./public_questions.php?unanswered=true">Unanswered</a></span>
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
@@ -132,7 +148,7 @@ $judul = "Public Questions";
                                             // ambil jumlah likes
                                                 $likes = get_all_byId("likes", "question_id", $questions[$pos]["id"]);
                                                 if( count($likes) > 0 ){
-                                                    $likeCounts = count($views);
+                                                    $likeCounts = count($likes);
                                                 }else{
                                                     $likeCounts = 0;
                                                 }
@@ -173,7 +189,7 @@ $judul = "Public Questions";
                             <!-- prev -->
                             <?php if( $curPage > 0 ) : ?>
                                 <li class="page-item">
-                                    <a class="page-link abu" href="./public_questions.php?page=<?php echo $curPage ?>" aria-label="Previous">
+                                    <a class="page-link abu" href="./public_questions.php?page=<?php echo $curPage . $add ?>" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
@@ -181,13 +197,13 @@ $judul = "Public Questions";
                             <!-- prev -->
 
                             <?php foreach( $pagination as $pos => $page ) :  ?>
-                                <li class="page-item"><a class="page-link abu" href="./public_questions.php?page=<?php echo $pos + 1 ?>"><?php echo $pos + 1 ?></a></li>
+                                <li class="page-item"><a class="page-link abu" href="./public_questions.php?page=<?php echo $pos + 1 . $add?>"><?php echo $pos + 1 ?></a></li>
                             <?php endforeach; ?>
 
                             <!-- next -->
                             <?php if( $curPage != count($pagination) - 1 && count($questions) > 0) : ?>
                                 <li class="page-item">
-                                    <a class="page-link abu" href="./public_questions.php?page=<?php echo $curPage + 2 ?>" aria-label="Next">
+                                    <a class="page-link abu" href="./public_questions.php?page=<?php echo $curPage + 2 . $add ?>" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
