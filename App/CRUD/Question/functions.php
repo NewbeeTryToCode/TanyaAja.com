@@ -229,6 +229,23 @@ function insert_reply($data){
 	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
 }
 
+function insert_notif($data){
+
+	global $conn;
+
+	// ambil data dari tiap elemen dalam form
+	// htmlspecialchars() digunakan untuk membedakan script html, agar user tidak bisa menulis script html pada pengisian data
+	$name = htmlspecialchars($data["name"]);
+	$email = htmlspecialchars($data["email"]);
+    $pesan = htmlspecialchars($data["pesan"]);
+
+	// query insert data
+	$query = "INSERT INTO notifications VALUES ('', \"$name\", \"$email\", \"$pesan\");";
+
+	$result = mysqli_query($conn, $query);
+	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
+}
+
 // fungsi sql
 
 function get_all_byThisAndThat($table, $column1, $column2, $value1, $value2){
@@ -236,6 +253,19 @@ function get_all_byThisAndThat($table, $column1, $column2, $value1, $value2){
     $query = "SELECT * FROM $table WHERE $column1 = $value1 AND $column2 = $value2";
     $result = mysqli_query($conn, $query);
 
+    return get_data($result);
+}
+
+function get_search_notif($keyword){
+
+	global $conn;
+	$query = "SELECT * FROM notifications 
+				WHERE
+				name LIKE \"%$keyword%\" OR
+				email LIKE \"%$keyword%\" OR
+				description LIKE \"%$keyword%\" ORDER BY id DESC;
+			";
+	$result = mysqli_query($conn, $query);
     return get_data($result);
 }
 

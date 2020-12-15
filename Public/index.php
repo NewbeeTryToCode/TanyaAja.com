@@ -140,7 +140,7 @@
                 <img src="assets/img/contact-form.svg" alt="">
             </div>
             <div class="call-to-action">
-                <form action="" method="POST">
+                <form action="../App/CRUD/Question/notif.php" method="POST">
                     <div class="input-group">
                         <label for="nama">Nama</label>
                         <input type="text" name="name" id="name">
@@ -154,7 +154,7 @@
                         <textarea name="pesan" id="pesan" cols="30" rows="10"></textarea>
                     </div>
                     <div class="input-group">
-                        <button class="btn btn-primary">Kirim Pesan</button>
+                        <button class="btn btn-primary" type="submit" name="kirim">Kirim Pesan</button>
                     </div>
                 </form>
             </div>

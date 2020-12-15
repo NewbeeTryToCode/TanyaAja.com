@@ -3,7 +3,28 @@ include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 include("../CRUD/session.php");
 
-$judul = "Admin Notifications"
+// tombol search
+if( isset($_GET['search']) && !empty($_GET['search']) ){
+    $keyword = $_GET['search'];
+    $notifications = get_search_notif($keyword);
+    $add = "&search=$keyword";
+}else{
+    $notifications = get_all("notifications", "DESC");
+    $add = "";
+}
+
+$pagination = get_pagination($notifications);
+if( isset($_GET['page']) ){
+    // cek apakah angka
+    if( is_numeric($_GET['page']) && intval($_GET['page']) > 0){
+        $curPage=$_GET['page'] - 1;
+    }else{
+        $curPage = 0;
+    }
+}else{
+    $curPage = 0;
+}
+$judul = "Admin Notifications";
 ?>
 
 <!doctype html>
@@ -45,72 +66,63 @@ $judul = "Admin Notifications"
                 <div class="container-fluid mt-3 p-4">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item abu" id="filterNav">
-                            <h5 class="q-count">280,756 Notifications</h5>
+                            <?php if( count($notifications) > 0) : ?>
+                                <h5 class="q-count"><?php echo count($notifications) ?> Notifications</h5>
+                            <?php else : ?>
+                                <h5 class="q-count">No Notifications</h5>
+                            <?php endif; ?>
                             <span class="filter-item">
-                                <form class="form-inline">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                <!-- searching -->
+                                <form class="form-inline" action="./admin_notif.php" method="GET">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" value="<?php if(isset($keyword)) echo $keyword;?>">
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
+                                <!-- searching -->
                                 <span class="add shadow-sm"><i class="fas fa-plus-circle"></i></span>
                             </span>
                         </li>
+                        <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
+                        <?php for( $pos = $start; $pos <= $end; $pos++ ) : ?>
                         <li class="list-group-item abu">
                             <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                </div>
+                                <a href="" class="title"><h4><?php echo $notifications[$pos]['name'] . " - " . $notifications[$pos]['email'];?></h4></a>
+                                <p class="description"><?php echo $notifications[$pos]['description']; ?></p>
                             </div>
                             <br>
                         </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                </div>
-                            </div>
-                            <br>
-                        </li>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4>How to include API</h4></a>
-                                <p class="description">i cannot include API on my JavaScript code please help me on fixing this...</p>
-                                <div class="categories">
-                                    <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
-                                        <p class="ungu">Nathalie</p>
-                                    </span>
-                                </div>
-                            </div>
-                            <br>
-                        </li>
+                        <?php endfor; ?>
                     </ul>
+                    <!-- Pagination -->
                     <div class="pageContainer">
                         <ul class="pagination shadow-sm">
-                            <li class="page-item">
-                                <a class="page-link abu" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link abu" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link abu" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link abu" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link abu" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
+                            <!-- prev -->
+                            <?php if( $curPage > 0 ) : ?>
+                                <li class="page-item">
+                                    <a class="page-link abu" href="./admin_notif.php?page=<?php echo $curPage . $add ?>" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <!-- prev -->
+
+                            <?php foreach( $pagination as $pos => $page ) :  ?>
+                                <li class="page-item"><a class="page-link abu" href="./admin_notif.php?page=<?php echo $pos + 1 . $add?>"><?php echo $pos + 1 ?></a></li>
+                            <?php endforeach; ?>
+
+                            <!-- next -->
+                            <?php if( $curPage != count($pagination) - 1 && count($notifications) > 0) : ?>
+                                <li class="page-item">
+                                    <a class="page-link abu" href="./admin_notif.php?page=<?php echo $curPage + 2 . $add ?>" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <!-- next -->
+
+                           
                         </ul>
                     </div>
+                    <!-- Pagination -->
                 </div>
             </div>
             <!-- main content -->
