@@ -78,7 +78,6 @@ $judul = "Admin Notifications";
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
                                 <!-- searching -->
-                                <span class="add shadow-sm"><i class="fas fa-plus-circle"></i></span>
                             </span>
                         </li>
                         <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
