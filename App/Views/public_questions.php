@@ -111,18 +111,53 @@ $judul = "Public Questions";
                                             <!-- categories -->
                                         </div>
                                         <div class="icons">
+                                            <!-- Views -->
+                                            <?php 
+                                            // ambil jumlah views
+                                                $views = get_all_byId("views", "question_id", $questions[$pos]["id"]);
+                                                if( count($views) > 0 ){
+                                                    $viewCounts = count($views);
+                                                }else{
+                                                    $viewCounts = 0;
+                                                }
+                                            ?>
                                             <span class="shadow-sm">
                                                 <i class="far fa-eye"></i>
-                                                <p>7</p>
+                                                <p><?php echo $viewCounts; ?></p>
                                             </span>
+                                            <!-- views -->
+
+                                            <!-- likes -->
+                                            <?php 
+                                            // ambil jumlah likes
+                                                $likes = get_all_byId("likes", "question_id", $questions[$pos]["id"]);
+                                                if( count($likes) > 0 ){
+                                                    $likeCounts = count($views);
+                                                }else{
+                                                    $likeCounts = 0;
+                                                }
+                                            ?>
                                             <span class="shadow-sm">
                                                 <i class="far fa-check-circle"></i>
-                                                <p class="green">7</p>
+                                                <p class="green"><?php echo $likeCounts; ?></p>
                                             </span>
+                                            <!-- likes -->
+                                            
+                                            <!-- answers -->
+                                            <?php 
+                                            // ambil jumlah jawaban
+                                            $answers = get_all_byId("answers", "question_id", $questions[$pos]["id"]);
+                                            if( count($answers) > 0 ){
+                                                $answerCounts = count($answers);
+                                            }else{
+                                                $answerCounts = 0;
+                                            }
+                                            ?>
                                             <span class="shadow-sm">
                                                 <i class="far fa-check-square"></i>
-                                                <p class="red">7</p>
+                                                <p class="red"><?php echo $answerCounts ?></p>
                                             </span>
+                                            <!-- answers -->
                                         </div>
                                     </div>
                                     <br>

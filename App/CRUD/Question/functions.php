@@ -54,11 +54,28 @@ function insert_qustion($data){
 			
 		}
 
+
+		mysqli_query($conn, $query);
+
 	}
     
 	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
 }
 
+function insert_likes($id, $question_id){
+	// insert likes
+	global $conn;
+
+	$query = "INSERT INTO likes VALUES ('', $id, $question_id);";
+	mysqli_query($conn, $query);
+}
+function insert_views($id, $question_id){
+	// insert views
+	global $conn;
+	$query = "INSERT INTO views VALUES ('', $id, $question_id);";
+
+	mysqli_query($conn, $query);
+}
 function update_question($data){
 	global $conn;
 
@@ -216,6 +233,15 @@ function insert_reply($data){
 }
 
 // fungsi sql
+
+function get_all_byThisAndThat($table, $column1, $column2, $value1, $value2){
+	global $conn;
+    $query = "SELECT * FROM $table WHERE $column1 = $value1 AND $column2 = $value2";
+    $result = mysqli_query($conn, $query);
+
+    return get_data($result);
+}
+
 function get_search_data($keyword){
 
 	global $conn;

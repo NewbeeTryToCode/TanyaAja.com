@@ -34,6 +34,29 @@ if( isset($_GET['id']) && !empty($_GET['id']) ){
     exit;
 }
 
+// views
+$isUserviews = get_all_byThisAndThat("views", "user_id", "question_id", $user['id'], $id);
+if( !count($isUserviews) > 0 ){
+    insert_views($user['id'], $id);
+}
+
+// ambil jumlah views
+$views = get_all_byId("views", "question_id", $id);
+if( count($views) > 0 ){
+    $viewCounts = count($views);
+}else{
+    $viewCounts = 0;
+}
+
+// ambil jumlah jawaban
+$answers = get_all_byId("answers", "question_id", $id);
+if( count($answers) > 0 ){
+    $answerCounts = count($answers);
+}else{
+    $answerCounts = 0;
+}
+
+
 $judul = "Questions Detail"
 ?>
 
@@ -102,18 +125,35 @@ $judul = "Questions Detail"
                         </span>
                     </div>
                     <div class="icons">
+                        <!-- views -->
                         <span class="shadow-sm">
                             <i class="far fa-eye"></i>
-                            <p>7</p>
+                            <p><?php echo $viewCounts; ?></p>
                         </span>
-                        <span class="shadow-sm">
+                        <!-- views -->
+
+                        <!-- likes -->
+                        <?php $isUserLike = get_all_byThisAndThat("likes", "user_id", "question_id", $user['id'], $question['id']); ?>
+                        <span class="shadow-sm <?php if(count($isUserLike) > 0) echo "like"; ?>" id="like">
                             <i class="far fa-check-circle"></i>
-                            <p class="green">7</p>
+                            <?php $likes = get_all_byId("likes", "question_id", $question["id"]); ?>
+                            <?php 
+                                if( count($likes) > 0 ){
+                                    $likecounts = count($likes);
+                                }else{
+                                    $likecounts = 0;
+                                }
+                             ?>
+                            <p class="green"><?php echo $likecounts; ?></p>
                         </span>
+                        <!-- likes -->
+
+                        <!-- answers -->
                         <span class="shadow-sm">
                             <i class="far fa-check-square"></i>
-                            <p class="red">7</p>
+                            <p class="red"><?php echo $answerCounts; ?></p>
                         </span>
+                        <!-- answers -->
                     </div>
                 </div>
                 <!-- question -->
@@ -186,7 +226,7 @@ $judul = "Questions Detail"
                 <!-- your answer -->
                 <div class="container shadow rounded-lg yourAnswer mt-4" >
                     <form action="./detail_questions.php?id=<?php echo $question['id'];?>" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="question_id" value="<?php echo $question['id'];?>">
+                        <input type="hidden" name="question_id" value="<?php echo $question['id'];?>" id="input_quest_id">
                         <label for="foto">Add your image here</label><br>
                         <input type="file" id="foto" name="image">
                         <hr>
@@ -240,5 +280,6 @@ $judul = "Questions Detail"
         })
 
     </script>
+    <script src="../../Public/assets/js/questions.js"></script>
   </body>
 </html>

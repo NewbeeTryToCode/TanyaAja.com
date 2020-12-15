@@ -83,3 +83,17 @@ button[name=reply]:hover, button[name=post]:hover{
     justify-content: space-between;
     align-items: baseline;
 }
+
+#like:hover{
+    cursor: pointer;
+}
+
+.like{
+    font-weight: bold;
+    background-color: green;
+    color: white;
+}
+
+.like p{
+    color: white;
+}
