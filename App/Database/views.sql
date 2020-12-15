@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2020 at 05:05 AM
+-- Generation Time: Dec 15, 2020 at 10:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -42,7 +42,14 @@ INSERT INTO `views` (`id`, `user_id`, `question_id`) VALUES
 (2, 2, 37),
 (3, 2, 16),
 (4, 2, 19),
-(5, 1, 38);
+(5, 1, 38),
+(6, 1, 37),
+(8, 2, 41),
+(9, 1, 41),
+(11, 2, 15),
+(12, 2, 18),
+(13, 2, 20),
+(15, 2, 40);
 
 --
 -- Indexes for dumped tables
@@ -62,7 +69,7 @@ ALTER TABLE `views`
 -- AUTO_INCREMENT for table `views`
 --
 ALTER TABLE `views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

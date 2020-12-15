@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2020 at 02:48 PM
+-- Generation Time: Dec 15, 2020 at 10:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -61,7 +61,12 @@ INSERT INTO `categories` (`id`, `name`, `question_id`) VALUES
 (57, 'remove', 38),
 (73, 'jangan dijawab', 9),
 (74, 'random', 9),
-(75, 'gajelas', 9);
+(75, 'gajelas', 9),
+(76, 'python', 40),
+(77, 'selenium', 40),
+(78, 'selenium', 40),
+(79, 'sqlite', 41),
+(80, 'sqlite', 41);
 
 --
 -- Indexes for dumped tables
@@ -81,7 +86,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

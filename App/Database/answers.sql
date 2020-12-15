@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2020 at 02:50 PM
+-- Generation Time: Dec 15, 2020 at 10:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -47,7 +47,8 @@ INSERT INTO `answers` (`id`, `description`, `image`, `created_at`, `updated_at`,
 (4, 'You can use a simple if condition to check whether the onBlock is false and then use delete operator to delete a specific JSON Key.', '5fd6e4d7885b4.png', '2020-12-14', '2020-12-14', 1, 17),
 (5, 'I think..', 'no image', '2020-12-14', '2020-12-14', 1, 16),
 (7, 'I think..', '5fd6ea4b38bce.png', '2020-12-14', '2020-12-14', 1, 16),
-(8, 'I Don\'t Know', 'no image', '2020-12-14', '2020-12-14', 1, 15);
+(8, 'I Don\'t Know', 'no image', '2020-12-14', '2020-12-14', 1, 15),
+(12, 'halo', 'no image', '2020-12-15', '2020-12-15', 1, 38);
 
 --
 -- Indexes for dumped tables
@@ -67,7 +68,7 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
