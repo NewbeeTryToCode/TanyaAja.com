@@ -11,6 +11,12 @@ if(isset($_POST['delete'])){
     $question = get_all_byId("questions", "id", $id)[0];
     $answers = get_all_byId("answers", "question_id", $question['id']);
 
+    // hapus views
+    delete_byId("views", "question_id", $question['id']);
+
+    // hapus likes
+    delete_byId("likes", "question_id", $question['id']);
+
     // hapus balasan dan gambar jawaban
     foreach($answers as $answer){
         delete_byId("replies", "answer_id", $answer['id']);
