@@ -4,6 +4,25 @@ include("../CRUD/session.php");
 $judul = "Edit Profile"
 ?>
 
+<?php
+    if (isset($_GET['hal'])) {
+        //Pengujian jika edit data
+        if ($_GET['hal'] == "edit") {
+            //tampilkan data yang di edit
+            $tampil = mysqli_query($conn, "SELECT * FROM users WHERE id = '$_GET[id]'");
+            $data = mysqli_fetch_array($tampil);
+            if ($data) {
+              //jika data ditemukan, maka data di tampung ke dalam variabel
+              $vuser = $data['username'];
+              $vnama = $data['fname'];
+              $valamat = $data['address'];
+              $vemail = $data['email'];
+              $vphone = $data['phone'];
+            }
+        }
+      }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -42,25 +61,29 @@ $judul = "Edit Profile"
             <div class="container-fluid shadow-lg">
                 <div class="container-fluid mt-3 p-4">
                     <form>
+                        <?php
+                            $tampil = mysqli_query($conn, "SELECT * FROM users");
+                            $data = mysqli_fetch_array($tampil);
+                        ?>
                         <div class="form-group">
                             <label class="fontform" for="username">Username</label>
-                            <input type="text" class="form-control" id="username" value="Nathalie">
+                            <input type="text" class="form-control" id="username" value="<?=@$vuser?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="fname">Fullname</label>
-                            <input type="text" class="form-control" id="fname" value="Nathalie Theresia Girsang">
+                            <input type="text" class="form-control" id="fname" value="<?=@$vnama?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="email">Email</label>
-                            <input type="email" class="form-control" id="email" value="nathanalietheresia@gmail.com">
+                            <input type="email" class="form-control" id="email" value="<?=@$vemail?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="phone">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" value="089324812952">
+                            <input type="tel" class="form-control" id="phone" value="<?=@$vphone?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="addres">Address</label>
-                            <input type="text" class="form-control" id="addres" value="Jalanin aja dulu gang suwir batubulan">
+                            <input type="text" class="form-control" id="addres" value="<?=@$valamat?>">
                         </div>
                         <p class="fontform">Profile Picture</p>
                         <div class="custom-file">

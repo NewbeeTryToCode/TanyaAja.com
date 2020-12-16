@@ -67,7 +67,7 @@ $judul = "Profile";
                         </li>
                         <?php
                             $tampil = mysqli_query($conn, "SELECT * FROM users");
-                            $data = mysqli_fetch_array($tampil)
+                            $data = mysqli_fetch_array($tampil);
                         ?>
                         <li class="list-group-item abu">
                             <div class="quesion">
@@ -99,7 +99,7 @@ $judul = "Profile";
                                 <p class="fontbio"><?=$data['address']?></p>
                             </div>
                         </li>
-                        <a class="btn btn-outline-primary" href="edit_profile.php" role="button">Edit Profile</a>
+                        <a class="btn btn-outline-primary" href="edit_profile.php?hal=edit&id=<?=$data['id']?>" role="button">Edit Profile</a>
                     </ul>
                 </div>
             </div>
