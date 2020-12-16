@@ -6,23 +6,54 @@
         <p class="biru">nathalietheresia@gmail.com</p>
     </div>
     <div class="container shadow-sm">
-
         <ul class="list-group list-group-flush">
             <li class="list-group-item abu">
                 <a href="profile.php">Profile</a>
             </li>
             <li class="list-group-item abu">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Questions</a>
-                <ul type="none" class="list-group list-group-flush" id="homeSubmenu">
+                <a href="#Questions" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Questions</a>
+                <ul type="none" class="list-group list-group-flush" id="Questions">
                     <li class="abu">
-                        <a href="public_questions.php">Public Questions</a>
+                        <div class="container menuItem">
+                            <div>
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <a href="public_questions.php">Public Questions</a>
+                        </div>
                     </li>
                     <li class="abu">
-                        <a href="my_questions.php">My Questions</a>
+                        <div class="container menuItem">
+                            <div>
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <a href="my_questions.php">My Questions</a>
+                        </div>
                     </li>
                 </ul>
             </li>
-    
+            <?php if( $user['role'] == 'admin' ) : ?>
+                <li class="list-group-item abu">
+                    <a href="#AdminTools" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin Tools</a>
+                    <ul type="none" class="list-group list-group-flush" id="AdminTools">
+                        <li class="abu">
+                            <div class="container menuItem">
+                                <div>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <a href="admin_manage_question.php">Questions Manager</a>
+                            </div>
+                        </li>
+                        <li class="abu">
+                            <div class="container menuItem">
+                                <div>
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <a href="admin_notif.php">Notifications</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

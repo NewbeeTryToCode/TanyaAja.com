@@ -3,14 +3,6 @@ include("../CRUD/konek.db.php");
 include('../CRUD/Question/functions.php');
 include("../CRUD/session.php");
 
-
-// ambil data user
-$user = [
-    "username" => $_SESSION['username'],
-    "id" => $_SESSION['id'],
-    "role" => $_SESSION['role']
-];
-
 // tombol search
 if( isset($_GET['search']) && !empty($_GET['search']) ){
     $keyword = $_GET['search'];
@@ -33,7 +25,7 @@ if( isset($_GET['page']) ){
     $curPage = 0;
 }
 
-$judul = "My Question";
+$judul = "My Questions";
 ?>
 
 <!doctype html>
@@ -88,9 +80,7 @@ $judul = "My Question";
                                     <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                                 </form>
                                 <!-- searching -->
-                                <span class="filter-category shadow-sm biru"><a href="">Newest</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Hot</a></span>
-                                <span class="filter-category shadow-sm biru"><a href="">Unanswered</a></span>
+                                
                                 <span class="add shadow-sm"><a href="create_question.php"><i class="fas fa-plus-circle"></i></a></span>
                             </span>
                         </li>
@@ -122,18 +112,53 @@ $judul = "My Question";
                                         </div>
                                         <div class="icons">
                                             <div class="nocrudicon">
+                                                <!-- Views -->
+                                                <?php 
+                                                // ambil jumlah views
+                                                    $views = get_all_byId("views", "question_id", $questions[$pos]["id"]);
+                                                    if( count($views) > 0 ){
+                                                        $viewCounts = count($views);
+                                                    }else{
+                                                        $viewCounts = 0;
+                                                    }
+                                                ?>
                                                 <span class="shadow-sm">
                                                     <i class="far fa-eye"></i>
-                                                    <p>7</p>
+                                                    <p><?php echo $viewCounts; ?></p>
                                                 </span>
+                                                <!-- views -->
+
+                                                <!-- likes -->
+                                                <?php 
+                                                // ambil jumlah likes
+                                                    $likes = get_all_byId("likes", "question_id", $questions[$pos]["id"]);
+                                                    if( count($likes) > 0 ){
+                                                        $likeCounts = count($likes);
+                                                    }else{
+                                                        $likeCounts = 0;
+                                                    }
+                                                ?>
                                                 <span class="shadow-sm">
                                                     <i class="far fa-check-circle"></i>
-                                                    <p class="green">7</p>
+                                                    <p class="green"><?php echo $likeCounts; ?></p>
                                                 </span>
+                                                <!-- likes -->
+                                                
+                                                <!-- answers -->
+                                                <?php 
+                                                // ambil jumlah jawaban
+                                                $answers = get_all_byId("answers", "question_id", $questions[$pos]["id"]);
+                                                if( count($answers) > 0 ){
+                                                    $answerCounts = count($answers);
+                                                }else{
+                                                    $answerCounts = 0;
+                                                }
+                                                ?>
                                                 <span class="shadow-sm">
                                                     <i class="far fa-check-square"></i>
-                                                    <p class="red">7</p>
+                                                    <p class="red"><?php echo $answerCounts ?></p>
                                                 </span>
+                                                <!-- answers -->
                                             </div>
                                             <div class="crudicon">
                                                 <span class="shadow-sm">
@@ -196,13 +221,6 @@ $judul = "My Question";
         
     </div>
     <!-- Wrapper -->
-
-    
-
-
-
-
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 

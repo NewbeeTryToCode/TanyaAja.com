@@ -6,8 +6,8 @@ include("../CRUD/session.php");
 // tombol tambah
 if( isset($_POST['create']) ){
 
-    // validasi input
-    if (insert_qustion($_POST) > 0){
+    // insert input
+    if (insert_question($_POST) > 0){
 		echo "
 			<script>
 				alert ('data berhasil ditambahkan');
@@ -19,7 +19,7 @@ if( isset($_POST['create']) ){
 		echo "
 			<script>
 				alert ('data gagal ditambahkan');
-				document.location.href = ''public_questions.php';
+				document.location.href = 'public_questions.php';
 			</script>
 
 		";

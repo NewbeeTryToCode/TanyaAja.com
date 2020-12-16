@@ -1,4 +1,7 @@
 <?php 
+include("../CRUD/konek.db.php");
+include("../CRUD/session.php");
+
 $judul = "Profile"
 ?>
 
@@ -19,6 +22,7 @@ $judul = "Profile"
     <!-- My Styles -->
     <link rel="stylesheet" href="../../Public/assets/css/side_navbar.css">
     <link rel="stylesheet" href="../../Public/assets/css/profile special.css">
+    <link rel="stylesheet" href="../../Public/assets/css/publicq.css?v=<?php echo time();?>">
     <title>Profile</title>
   </head>
   <body>

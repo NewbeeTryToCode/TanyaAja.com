@@ -15,7 +15,7 @@ function delete_file($path, $filename){
     return unlink($path);
 }
 
-function insert_qustion($data){
+function insert_question($data){
 
     global $conn;
     $id = $_SESSION['id'];
@@ -59,6 +59,20 @@ function insert_qustion($data){
 	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
 }
 
+function insert_likes($id, $question_id){
+	// insert likes
+	global $conn;
+
+	$query = "INSERT INTO likes VALUES ('', $id, $question_id);";
+	mysqli_query($conn, $query);
+}
+function insert_views($id, $question_id){
+	// insert views
+	global $conn;
+	$query = "INSERT INTO views VALUES ('', $id, $question_id);";
+
+	mysqli_query($conn, $query);
+}
 function update_question($data){
 	global $conn;
 
@@ -215,7 +229,46 @@ function insert_reply($data){
 	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
 }
 
+function insert_notif($data){
+
+	global $conn;
+
+	// ambil data dari tiap elemen dalam form
+	// htmlspecialchars() digunakan untuk membedakan script html, agar user tidak bisa menulis script html pada pengisian data
+	$name = htmlspecialchars($data["name"]);
+	$email = htmlspecialchars($data["email"]);
+    $pesan = htmlspecialchars($data["pesan"]);
+
+	// query insert data
+	$query = "INSERT INTO notifications VALUES ('', \"$name\", \"$email\", \"$pesan\");";
+
+	$result = mysqli_query($conn, $query);
+	return mysqli_affected_rows($conn); // mysqli_affected_rows () = -1 jika error
+}
+
 // fungsi sql
+
+function get_all_byThisAndThat($table, $column1, $column2, $value1, $value2){
+	global $conn;
+    $query = "SELECT * FROM $table WHERE $column1 = $value1 AND $column2 = $value2";
+    $result = mysqli_query($conn, $query);
+
+    return get_data($result);
+}
+
+function get_search_notif($keyword){
+
+	global $conn;
+	$query = "SELECT * FROM notifications 
+				WHERE
+				name LIKE \"%$keyword%\" OR
+				email LIKE \"%$keyword%\" OR
+				description LIKE \"%$keyword%\" ORDER BY id DESC;
+			";
+	$result = mysqli_query($conn, $query);
+    return get_data($result);
+}
+
 function get_search_data($keyword){
 
 	global $conn;
@@ -268,11 +321,37 @@ function get_max_id($table){
     return get_data($result)[0]["MAX(id)"];
 }
 
-function get_all($table){
+function get_all($table, $sort){
     global $conn;
-    $query = "SELECT * FROM $table ORDER BY id DESC";
+    $query = "SELECT * FROM $table ORDER BY id $sort";
     $result = mysqli_query($conn, $query);
 
+    return get_data($result);
+}
+
+function get_hot(){
+
+	global $conn;
+    $query = "SELECT q.id, COUNT(question_id) as jumlah, q.title, q.description, q.user_id, q.updated_at, u.username
+				FROM questions q INNER JOIN likes l
+				ON q.id = l.question_id 
+				INNER JOIN users u
+				ON u.id = q.user_id
+				GROUP BY l.question_id ORDER BY jumlah DESC
+			";
+    $result = mysqli_query($conn, $query);
+    return get_data($result);
+	
+}
+
+function get_unanswered(){
+	
+	global $conn;
+    $query = "SELECT * FROM questions q LEFT JOIN
+				(SELECT question_id, COUNT(question_id) as jumlah FROM answers GROUP BY question_id) n
+				ON q.id = n.question_id WHERE jumlah IS NULL
+			";
+    $result = mysqli_query($conn, $query);
     return get_data($result);
 }
 
