@@ -6,7 +6,6 @@ $judul = "Edit Profile"
 
 <?php
     if (isset($_POST['simpan'])) {
-        //Pengujian data di edit atau di simpan baru
         if ($_GET['hal'] == "edit") {
           //data akan di edit
           $edit = mysqli_query($conn, "UPDATE `users` SET username ='$_POST[tusername]', fname='$_POST[tfname]', email='$_POST[temail]', phone = '$_POST[tphone]', alamat ='$_POST[talamat]' WHERE id ='$_GET[id]'");
