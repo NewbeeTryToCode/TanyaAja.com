@@ -5,6 +5,24 @@ $judul = "Edit Profile"
 ?>
 
 <?php
+    if (isset($_POST['simpan'])) {
+        //Pengujian data di edit atau di simpan baru
+        if ($_GET['hal'] == "edit") {
+          //data akan di edit
+          $edit = mysqli_query($conn, "UPDATE `users` SET username ='$_POST[tusername]', fname='$_POST[tfname]', email='$_POST[temail]', phone = '$_POST[tphone]', alamat ='$_POST[talamat]' WHERE id ='$_GET[id]'");
+          if ($edit) {//Jika Edit sukses
+            echo "<script>
+                      alert('Edit data sukses!'); 
+                      document.location='profile.php';
+                  </script>";
+          }else{//Jika Edit Gagal
+            echo "<script>
+                      alert('Edit data GAGAL!! ^_^'); 
+                      document.location='profile.php';
+                  </script>";
+          }
+        }
+    }
     if (isset($_GET['hal'])) {
         //Pengujian jika edit data
         if ($_GET['hal'] == "edit") {
@@ -15,7 +33,7 @@ $judul = "Edit Profile"
               //jika data ditemukan, maka data di tampung ke dalam variabel
               $vuser = $data['username'];
               $vnama = $data['fname'];
-              $valamat = $data['address'];
+              $valamat = $data['alamat'];
               $vemail = $data['email'];
               $vphone = $data['phone'];
             }
@@ -60,30 +78,30 @@ $judul = "Edit Profile"
             <!-- main content -->
             <div class="container-fluid shadow-lg">
                 <div class="container-fluid mt-3 p-4">
-                    <form>
+                    <form action="" method="POST">
                         <?php
                             $tampil = mysqli_query($conn, "SELECT * FROM users");
                             $data = mysqli_fetch_array($tampil);
                         ?>
                         <div class="form-group">
                             <label class="fontform" for="username">Username</label>
-                            <input type="text" class="form-control" id="username" value="<?=@$vuser?>">
+                            <input type="text" class="form-control" name="tusername" value="<?=@$vuser?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="fname">Fullname</label>
-                            <input type="text" class="form-control" id="fname" value="<?=@$vnama?>">
+                            <input type="text" class="form-control" name="tfname" value="<?=@$vnama?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="email">Email</label>
-                            <input type="email" class="form-control" id="email" value="<?=@$vemail?>">
+                            <input type="email" class="form-control" name="temail" value="<?=@$vemail?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="phone">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" value="<?=@$vphone?>">
+                            <input type="tel" class="form-control" onkeypress="return onlyNumberKey(event)" name="tphone" value="<?=@$vphone?>">
                         </div>
                         <div class="form-group">
                             <label class="fontform" for="addres">Address</label>
-                            <input type="text" class="form-control" id="addres" value="<?=@$valamat?>">
+                            <input type="text" class="form-control" name="talamat" value="<?=@$valamat?>">
                         </div>
                         <p class="fontform">Profile Picture</p>
                         <div class="custom-file">
@@ -95,7 +113,7 @@ $judul = "Edit Profile"
                             <label class="custom-file-label" for="profilepic">Choose file</label>
                             <input type="file" class="custom-file-input" id="profilepic">
                         </div>
-                        <br><br><button type="button" class="btn abu btn-primary tombol"><a href="profile.php"><i class="far fa-check-circle ijo"></i>  Save</a></button><br>
+                        <br><br><button type="submit" name="simpan" class="btn abu btn-primary tombol"><i class="far fa-check-circle ijo"></i>  Save</a></button><br>
                       </form>
                 </div>
             </div>
@@ -137,5 +155,14 @@ $judul = "Edit Profile"
         })
 
     </script>
+    <script> 
+              function onlyNumberKey(evt) { 
+                  // Only ASCII charactar in that range allowed 
+                  var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+                  if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) 
+                  return false; 
+                  return true; 
+              } 
+        </script>
   </body>
 </html>

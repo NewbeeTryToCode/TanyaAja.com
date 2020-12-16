@@ -96,7 +96,7 @@ $judul = "Profile";
                         <li class="list-group-item abu">
                             <div class="quesion">
                                 <h4 class="fonttitle">Address</h4>
-                                <p class="fontbio"><?=$data['address']?></p>
+                                <p class="fontbio"><?=$data['alamat']?></p>
                             </div>
                         </li>
                         <a class="btn btn-outline-primary" href="edit_profile.php?hal=edit&id=<?=$data['id']?>" role="button">Edit Profile</a>
