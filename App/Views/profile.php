@@ -2,7 +2,7 @@
 include("../CRUD/konek.db.php");
 include("../CRUD/session.php");
 
-$judul = "Profile"
+$judul = "Profile";
 ?>
 
 <!doctype html>
@@ -65,34 +65,38 @@ $judul = "Profile"
                                 </div>
                             </div>
                         </li>
+                        <?php
+                            $tampil = mysqli_query($conn, "SELECT * FROM users");
+                            $data = mysqli_fetch_array($tampil)
+                        ?>
                         <li class="list-group-item abu">
                             <div class="quesion">
                                 <h4 class="fonttitle">Username</h4>
-                                <p class="fontbio">Nathalie</p>
+                                <p class="fontbio"><?=$data['username']?></p>
                             </div>
                         </li>
                         <li class="list-group-item abu">
                             <div class="quesion">
                                 <h4 class="fonttitle">Full Name</h4>
-                                <p class="fontbio">Nathalie Theresia Girsang</p>
+                                <p class="fontbio"><?=$data['fname']?></p>
                             </div>
                         </li>
                         <li class="list-group-item abu">
                             <div class="quesion">
                                 <h4 class="fonttitle">Email</h4>
-                                <p class="fontbio">nathanalietheresia@gmail.com</p>
+                                <p class="fontbio"><?=$data['email']?></p>
                             </div>
                         </li>
                         <li class="list-group-item abu">
                             <div class="quesion">
                                 <h4 class="fonttitle">Phone Number</h4>
-                                <p class="fontbio">089324812952</p>
+                                <p class="fontbio"><?=$data['phone']?></p>
                             </div>
                         </li>
                         <li class="list-group-item abu">
                             <div class="quesion">
                                 <h4 class="fonttitle">Address</h4>
-                                <p class="fontbio">Jalanin aja dulu gang suwir batubulan</p>
+                                <p class="fontbio"><?=$data['address']?></p>
                             </div>
                         </li>
                         <a class="btn btn-outline-primary" href="edit_profile.php" role="button">Edit Profile</a>

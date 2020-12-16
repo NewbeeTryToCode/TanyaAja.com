@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-footer">
                     <p>Dont have account yet?
-                        <a href="register.php" class="link">Sign up</a>
+                        <a href="signup.php" class="link">Sign up</a>
                     </p>
                 </div>
             </form>

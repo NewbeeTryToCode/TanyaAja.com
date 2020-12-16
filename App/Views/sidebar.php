@@ -1,9 +1,13 @@
 <!-- Side Bar -->
 <nav id="sidebar" class="shadow-lg p-4">
+    <?php
+            $tampil = mysqli_query($conn, "SELECT * FROM users");
+            $data = mysqli_fetch_array($tampil)
+    ?>
     <div class="sidebar-header d-flex flex-column align-items-center">
         <img class="avatarImg" src="../../Public/assets/img/profil.jpg" alt="">
-        <h5 class="mt-3 biru">Nathalie</h5>
-        <p class="biru">nathalietheresia@gmail.com</p>
+        <h5 class="mt-3 biru"><?=$data['username']?></h5>
+        <p class="biru"><?=$data['email']?></p>
     </div>
     <div class="container shadow-sm">
         <ul class="list-group list-group-flush">
