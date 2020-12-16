@@ -8,7 +8,17 @@ $judul = "Edit Profile"
     if (isset($_POST['simpan'])) {
         if ($_GET['hal'] == "edit") {
           //data akan di edit
-          $edit = mysqli_query($conn, "UPDATE `users` SET username ='$_POST[tusername]', fname='$_POST[tfname]', email='$_POST[temail]', phone = '$_POST[tphone]', alamat ='$_POST[talamat]' WHERE id ='$_GET[id]'");
+          $nama_prof = $_FILES['profilepic'];
+          $source = $_FILES['profilepic']['tmp_name'];
+          $folder = '../CRUD/Profile/uploads/';
+
+          move_uploaded_file($source, $folder.$nama_prof);
+          $nama_back = $_FILES['background'];
+          $source = $_FILES['background']['tmp_name'];
+          $folder = '../CRUD/Profile/uploads/background/';
+
+          move_uploaded_file($source, $folder.$nama_back);
+          $edit = mysqli_query($conn, "UPDATE `users` SET username ='$_POST[tusername]', fname='$_POST[tfname]', email='$_POST[temail]', phone = '$_POST[tphone]', alamat ='$_POST[talamat]', prof='$_FILES[profilepic]', back = '$nama_back' WHERE id ='$_GET[id]'");
           if ($edit) {//Jika Edit sukses
             echo "<script>
                       alert('Edit data sukses!'); 
@@ -77,7 +87,7 @@ $judul = "Edit Profile"
             <!-- main content -->
             <div class="container-fluid shadow-lg">
                 <div class="container-fluid mt-3 p-4">
-                    <form action="" method="POST">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         <?php
                             $tampil = mysqli_query($conn, "SELECT * FROM users");
                             $data = mysqli_fetch_array($tampil);
@@ -105,12 +115,12 @@ $judul = "Edit Profile"
                         <p class="fontform">Profile Picture</p>
                         <div class="custom-file">
                             <label class="custom-file-label" for="profilepic">Choose file</label>
-                            <input type="file" class="custom-file-input" id="profilepic">
+                            <input type="file" class="custom-file-input" name="profilepic">
                         </div><br>
                         <br><p class="fontform">Backround Picture</p>
                         <div class="custom-file">
                             <label class="custom-file-label" for="profilepic">Choose file</label>
-                            <input type="file" class="custom-file-input" id="profilepic">
+                            <input type="file" class="custom-file-input" name="background">
                         </div>
                         <br><br><button type="submit" name="simpan" class="btn abu btn-primary tombol"><i class="far fa-check-circle ijo"></i>  Save</a></button><br>
                       </form>

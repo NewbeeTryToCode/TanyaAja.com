@@ -44,11 +44,15 @@ $judul = "Profile";
                 <div class="container-fluid mt-3 p-4">
                     <ul class="list-group list-group-flush">
                         <div class="parrent">
-                            <img src="../../Public/assets/img/Kander.svg" class="img-fluid background" alt="Kander">
-                            <div>
-                                <img class="align-self-center mr-3 position-absolute rounded-circle img-fluid avatar" src="../../Public/assets/img/profil.jpg" alt="Generic placeholder image">
-                            </div>
-                        </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-14">
+                                <img src="../CRUD/Profile/uploads/background/<?=$data['back']?>" class="img-fluid background" alt="Kander">
+                                    <div class="col-lg5">
+                                    <img class="position-absolute rounded-circle img-fluid avatar" src="../CRUD/Profile/uploads/<?=$data['prof']?>" alt="Generic placeholder image">    
+                                </div>
+                                </div>
+                            </div> 
+                        </div>  
                         <li class="list-group-item abu">
                             <div class="container bawahback">
                                 <div class="row justify-content-center">
