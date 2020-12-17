@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +38,14 @@
         </div>
         <div class="main-form">
             <h1 class="tittle">Login</h1>
+            <?php if (isset($_SESSION['errormsg'])) {
+                echo "<div class='error_msg'>" . $_SESSION['errormsg'] . "</div>";
+            }
+            unset($_SESSION['errormsg']); ?>
+            <?php if (isset($_SESSION['successmsg'])) {
+                echo "<div class='success_msg'>" . $_SESSION['successmsg'] . "</div>";
+            }
+            unset($_SESSION['successmsg']); ?>
             <form action="../CRUD/Auth/login.inc.php" method="POST">
                 <div class="input-group">
                     <label for="username">Username</label>

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +36,12 @@
         </div>
         <div class="main-form">
             <h1 class="tittle">Sign up</h1>
-            <form action="" method="POST">
+
+            <?php if (isset($_SESSION['errormsg'])) {
+                echo "<div class='error_msg'>" . $_SESSION['errormsg'] . "</div>";
+            }
+            unset($_SESSION['errormsg']); ?>
+            <form action="../CRUD/Auth/signup.php" method="POST">
                 <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username">
@@ -81,9 +87,8 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="input-group btn">
-                    <button class="btn-login">Sign up</button>
+                    <button class="btn-login" name="signup" id="signup">Sign up</button>
                 </div>
                 <div class="form-footer">
                     <p>Already had an account? <a href="login.php" class="link">Login</a></p>
@@ -91,6 +96,7 @@
             </form>
         </div>
     </section>
+
     <div class="graphic1"></div>
     <div class="graphic2"></div>
     <div class="dash"></div>
