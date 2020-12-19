@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 02:44 AM
+-- Generation Time: Dec 19, 2020 at 01:59 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -36,8 +36,8 @@ CREATE TABLE `users` (
   `email` varchar(256) NOT NULL,
   `phone` varchar(14) NOT NULL,
   `alamat` varchar(256) NOT NULL,
-  `prof` varchar(150) NOT NULL,
-  `back` varchar(150) NOT NULL
+  `prof` varchar(256) NOT NULL,
+  `back` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -45,8 +45,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `fname`, `email`, `phone`, `alamat`, `prof`, `back`) VALUES
-(1, 'dede12', '1234', 'user', 'dede laksmana', 'dede.laksmana.yuda@gmail.com', '0812345678', 'Jl. Gajah Duduk No.12', 'Array', 'Array'),
-(2, 'admin1', '1234', 'admin', '', '', '0', '', '', '');
+(1, 'dede12', '1234', 'user', 'dede laksmana yuda', 'dede.laksmana.yuda@gmail.com', '0812345678', 'Jl. Gajah Duduk No.12', 'avatar.png', 'unnamed.jpg'),
+(2, 'admin1', '1234', 'admin', '', '', '', '', 'avatar.png', 'unnamed.jpg'),
+(3, 'usertes1', '81dc9bdb52d04dc20036dbd8313ed055', 'user', 'dede laksmana', 'usertes@gmail.com', '081234567', 'tes tes', 'avatar.png', 'unnamed.jpg'),
+(4, 'usertes2', '8ff04075dc6e237757de47f916489793', 'user', '', 'usertes2@gmail.com', '', '', 'avatar.png', 'unnamed.jpg'),
+(5, 'usertes3', 'c62844930b2abc18fa305afc304b2d8a', 'user', '', 'usertes3@gmail.com', '', '', 'avatar.png', 'unnamed.jpg');
 
 --
 -- Indexes for dumped tables
@@ -66,7 +69,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
