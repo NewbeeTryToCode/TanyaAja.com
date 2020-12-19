@@ -49,12 +49,11 @@ $judul = "Profile";
                     <ul class="list-group list-group-flush">
                         <div class="parrent">
                             <div class="row justify-content-center">
-                                <div class="col-6">
-                                <img src="../CRUD/Profile/uploads/background/<?=$data['back']?>" class="img-responsive img-rounded background" alt="Kander">
-                                <div class="col-lg5">
-                                    <img class='position-absolute rounded-circle img-fluid avatar' src='../CRUD/Profile/uploads/<?=$data['prof']?>' alt='Generic placeholder image'> 
-                                    
-                                </div>
+                                <div class="bgContainer">
+                                    <img src="../CRUD/Profile/uploads/background/<?=$data['back']?>" class="img-responsive img-rounded background" alt="Kander">
+                                    <div class="pfContainer">
+                                        <img class='position-absolute rounded-circle img-fluid avatar' src='../CRUD/Profile/uploads/<?=$data['prof']?>' alt='Generic placeholder image'> 
+                                    </div>
                                 </div>
                             </div> 
                         </div>  
