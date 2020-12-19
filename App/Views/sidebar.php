@@ -1,10 +1,11 @@
 <!-- Side Bar -->
 <nav id="sidebar" class="shadow-lg p-4">
     <?php
-            $tampil = mysqli_query($conn, "SELECT * FROM users");
+            $id =$_SESSION['id'];
+            $tampil = mysqli_query($conn, "SELECT * FROM users Where id ='$id'");
             $data = mysqli_fetch_array($tampil)
     ?>
-    <div class="sidebar-header d-flex flex-column align-items-center">
+    <div class="sidebar-header d-flex flex-column align-items-center">  
         <img class="avatarImg" src="../CRUD/Profile/uploads/<?=$data['prof']?>"  alt="<?=$data['prof']?>">
         <h5 class="mt-3 biru"><?=$data['username']?></h5>
         <p class="biru"><?=$data['email']?></p>

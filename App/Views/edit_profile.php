@@ -1,24 +1,24 @@
 <?php 
 include("../CRUD/konek.db.php");
 include("../CRUD/session.php");
-$judul = "Edit Profile"
+$judul = "Edit Profile";
 ?>
 
 <?php
     if (isset($_POST['simpan'])) {
         if ($_GET['hal'] == "edit") {
-          //data akan di edit
-          $nama_prof = $_FILES['profilepic'];
-          $source = $_FILES['profilepic']['tmp_name'];
-          $folder = '../CRUD/Profile/uploads/';
-
-          move_uploaded_file($source, $folder.$nama_prof);
-          $nama_back = $_FILES['background'];
+            //data akan di edit
+            $nama_prof = $_FILES['profilepic']['name'];
+            $source = $_FILES['profilepic']['tmp_name'];
+            $folder = '../CRUD/Profile/uploads/';
+            $profil = mysqli_query($conn, "UPDATE users SET prof='$nama_prof' WHERE id ='$_GET[id]'");
+        move_uploaded_file($source, $folder.$nama_prof);
+          $nama_back = $_FILES['background']['name'];
           $source = $_FILES['background']['tmp_name'];
           $folder = '../CRUD/Profile/uploads/background/';
-
+          $background = mysqli_query($conn, "UPDATE users SET back = '$nama_back' WHERE id ='$_GET[id]'");
           move_uploaded_file($source, $folder.$nama_back);
-          $edit = mysqli_query($conn, "UPDATE `users` SET username ='$_POST[tusername]', fname='$_POST[tfname]', email='$_POST[temail]', phone = '$_POST[tphone]', alamat ='$_POST[talamat]', prof='$_FILES[profilepic]', back = '$nama_back' WHERE id ='$_GET[id]'");
+          $edit = mysqli_query($conn, "UPDATE `users` SET username ='$_POST[tusername]', fname='$_POST[tfname]', email='$_POST[temail]', phone = '$_POST[tphone]', alamat ='$_POST[talamat]' WHERE id ='$_GET[id]'");
           if ($edit) {//Jika Edit sukses
             echo "<script>
                       alert('Edit data sukses!'); 
@@ -113,16 +113,20 @@ $judul = "Edit Profile"
                             <input type="text" class="form-control" name="talamat" value="<?=@$valamat?>">
                         </div>
                         <p class="fontform">Profile Picture</p>
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="profilepic">Choose file</label>
-                            <input type="file" class="custom-file-input" name="profilepic">
-                        </div><br>
-                        <br><p class="fontform">Backround Picture</p>
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="profilepic">Choose file</label>
-                            <input type="file" class="custom-file-input" name="background">
-                        </div>
-                        <br><br><button type="submit" name="simpan" class="btn abu btn-primary tombol"><i class="far fa-check-circle ijo"></i>  Save</a></button><br>
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="profilepic">
+                                    <label class="custom-file-label" for="profilepic" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                                </div>
+                            </div>    
+                            <p class="fontform">Backround Picture</p>
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="background">
+                                    <label class="custom-file-label" for="background" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                                </div>
+                            </div>
+                        <br><br><button type="submit" name="simpan" class="btn abu btn-primary tombol"><i class="far fa-check-circle ijo"></i>  Save</button><br>
                       </form>
                 </div>
             </div>

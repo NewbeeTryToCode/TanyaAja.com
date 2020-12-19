@@ -67,7 +67,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['emai
     else {
       //encrypt password sebelum masuk db
       $password = md5($pwd);
-      $query = "INSERT INTO users (username,email,password) VALUES('$user','$email','$password')";
+      $query = "INSERT INTO users (username,email,password,role, prof, back) VALUES('$user','$email','$password','user','avatar.png','unnamed.jpg')";
       mysqli_query($conn, $query);
       $_SESSION['successmsg'] = "user berhasil dibuat";
       header("Location: ../../Views/login.php");

@@ -2,9 +2,13 @@
 include("../CRUD/konek.db.php");
 include("../CRUD/session.php");
 
+$id = $_SESSION['id'];
 $judul = "Profile";
 ?>
-
+<?php
+    $tampil = mysqli_query($conn, "SELECT * FROM users WHERE id='$id'");
+    $data = mysqli_fetch_array($tampil);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,8 +51,8 @@ $judul = "Profile";
                             <div class="row justify-content-center">
                                 <div class="col-6">
                                 <img src="../CRUD/Profile/uploads/background/<?=$data['back']?>" class="img-responsive img-rounded background" alt="Kander">
-                                    <div class="col-lg5">
-                                    <img class="position-absolute rounded-circle img-fluid avatar" src="../CRUD/Profile/uploads/<?=$data['prof']?>" alt="Generic placeholder image">    
+                                <div class="col-lg5">
+                                    <img class='position-absolute rounded-circle img-fluid avatar' src='../CRUD/Profile/uploads/<?=$data['prof']?>' alt='Generic placeholder image'> 
                                 </div>
                                 </div>
                             </div> 
@@ -59,20 +63,30 @@ $judul = "Profile";
                                     <div class="col-4">
                                         <p>Pertanyaan Dijawab</p>
                                         <i class="far fa-check-circle col-md-auto"></i>
-                                        <p>50</p>
+                                        <?php
+                                            $jawab = 0;
+                                            $sqljawab = mysqli_query($conn, "SELECT * FROM answers WHERE user_id='$id'");
+                                            while ($jumlah = mysqli_fetch_array($sqljawab)) {
+                                                $jawab++;
+                                            }
+                                        ?>
+                                        <p><?=$jawab?></p>
                                     </div>
                                     <div class="col-4">
                                       <p>Pertanyaan Diajukan</p>
                                       <i class="far fa-question-circle"></i>
-                                      <p>50</p>
+                                      <?php
+                                            $tanya = 0;
+                                            $sqltanya = mysqli_query($conn, "SELECT * FROM questions WHERE user_id='$id'");
+                                            while ($jumlah = mysqli_fetch_array($sqltanya)) {
+                                                $tanya++;
+                                            }
+                                        ?>
+                                      <p><?=$tanya?></p>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <?php
-                            $tampil = mysqli_query($conn, "SELECT * FROM users");
-                            $data = mysqli_fetch_array($tampil);
-                        ?>
                         <li class="list-group-item abu">
                             <div class="quesion">
                                 <h4 class="fonttitle">Username</h4>
