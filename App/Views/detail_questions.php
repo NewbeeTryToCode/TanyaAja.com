@@ -195,7 +195,7 @@ $judul = "Questions Detail"
                                 <p class="coklat"><?php echo $reply['description']; ?></p>
                                 <div class="profileContainer">
                                     <span class="profile">
-                                        <?php $profile = get_all_byId("users", "id", $question['user_id'])[0]; ?>
+                                        <?php $profile = get_all_byId("users", "id", $reply['user_id'])[0]; ?>
                                         <img src="../CRUD/Profile/uploads/<?php echo $profile['prof']; ?>" alt="">
                                         <?php $date = date_create($reply['updated_at']);?>
                                         <span>
