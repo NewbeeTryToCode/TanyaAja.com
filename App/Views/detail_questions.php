@@ -113,8 +113,9 @@ $judul = "Questions Detail"
                     <?php endif; ?>
                     <div class="categories">
                         <span class="profile">
-                            <img src="../../Public/assets/img/profil.jpg" alt="">
-                            <p class="ungu">Nathalie</p>
+                            <?php $profile = get_all_byId("users", "id", $question['user_id'])[0]; ?>
+                            <img src="../CRUD/Profile/uploads/<?php echo $profile['prof']; ?>" alt="">
+                            <p class="ungu"><?php echo $profile['username']; ?></p>
                         </span>
                         <span class="categoriesContainer">
                             <!-- categories -->
@@ -180,8 +181,9 @@ $judul = "Questions Detail"
                             <!-- image -->
                             <div class="profileContainer">
                                 <span class="profile">
-                                    <img src="../../Public/assets/img/profil.jpg" alt="">
-                                    <p class="ungu">Nathalie</p>
+                                    <?php $profile = get_all_byId("users", "id", $answer['user_id'])[0]; ?>
+                                    <img src="../CRUD/Profile/uploads/<?php echo $profile['prof']; ?>" alt="">
+                                    <p class="ungu"><?php echo $profile['username']; ?></p>
                                 </span>
                             </div>
                             <hr>
@@ -193,10 +195,11 @@ $judul = "Questions Detail"
                                 <p class="coklat"><?php echo $reply['description']; ?></p>
                                 <div class="profileContainer">
                                     <span class="profile">
-                                        <img src="../../Public/assets/img/profil.jpg" alt="">
+                                        <?php $profile = get_all_byId("users", "id", $question['user_id'])[0]; ?>
+                                        <img src="../CRUD/Profile/uploads/<?php echo $profile['prof']; ?>" alt="">
                                         <?php $date = date_create($reply['updated_at']);?>
                                         <span>
-                                            <p class="ungu">Nathalie</p>
+                                            <p class="ungu"><?php echo $profile['username']; ?></p>
                                             <pre class="dateTime replies"><?php echo " - " . date_format($date,"d M Y") ?></pre>
                                         </span>
                                     </span>

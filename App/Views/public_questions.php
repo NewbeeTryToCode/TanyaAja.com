@@ -41,6 +41,8 @@ if( isset($_GET['page']) ){
     $curPage = 0;
 }
 
+// ambil user
+
 $judul = "Public Questions";
 ?>
 
@@ -117,8 +119,9 @@ $judul = "Public Questions";
                                         </p>
                                         <div class="categories">
                                             <span class="profile">
-                                                <img src="../../Public/assets/img/profil.jpg" alt="">
-                                                <p class="ungu">Nathalie</p>
+                                                <?php $profile = get_all_byId("users", "id", $questions[$pos]['user_id'])[0]; ?>
+                                                <img src="../CRUD/Profile/uploads/<?php echo $profile['prof']; ?>" alt="">
+                                                <p class="ungu"><?php echo $profile['username']; ?></p>
                                             </span>
                                             <!-- categories -->
                                             <?php $categories = get_all_byId("categories", "question_id", $questions[$pos]["id"]);?>
