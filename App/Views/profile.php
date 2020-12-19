@@ -53,6 +53,7 @@ $judul = "Profile";
                                 <img src="../CRUD/Profile/uploads/background/<?=$data['back']?>" class="img-responsive img-rounded background" alt="Kander">
                                 <div class="col-lg5">
                                     <img class='position-absolute rounded-circle img-fluid avatar' src='../CRUD/Profile/uploads/<?=$data['prof']?>' alt='Generic placeholder image'> 
+                                    
                                 </div>
                                 </div>
                             </div> 

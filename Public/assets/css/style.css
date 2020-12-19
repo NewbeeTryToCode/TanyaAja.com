@@ -33,6 +33,28 @@ body {
     height: 100px;
 }
 
+.error_msg {
+    width: 100%;
+    margin: 0px auto;
+    padding: 5px;
+    border: 1px solid #a94442;
+    color: #a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.success_msg {
+    width: 100%;
+    margin: 0px auto;
+    padding: 5px;
+    border: 1px solid #2f7b00;
+    color: #2f7b00;
+    background: #6be61f;
+    border-radius: 5px;
+    text-align: left;
+}
+
 .brand-logo img {
     width: 12rem;
 }

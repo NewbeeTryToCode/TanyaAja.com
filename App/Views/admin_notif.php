@@ -80,16 +80,18 @@ $judul = "Admin Notifications";
                                 <!-- searching -->
                             </span>
                         </li>
-                        <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
-                        <?php for( $pos = $start; $pos <= $end; $pos++ ) : ?>
-                        <li class="list-group-item abu">
-                            <div class="quesion">
-                                <a href="" class="title"><h4><?php echo $notifications[$pos]['name'] . " - " . $notifications[$pos]['email'];?></h4></a>
-                                <p class="description"><?php echo $notifications[$pos]['description']; ?></p>
-                            </div>
-                            <br>
-                        </li>
-                        <?php endfor; ?>
+                        <?php if( count($notifications) > 0 ) : ?>
+                            <?php $start = $pagination[$curPage]['start']; $end = $pagination[$curPage]['end']; ?>
+                            <?php for( $pos = $start; $pos <= $end; $pos++ ) : ?>
+                            <li class="list-group-item abu">
+                                <div class="quesion">
+                                    <a href="" class="title"><h4><?php echo $notifications[$pos]['name'] . " - " . $notifications[$pos]['email'];?></h4></a>
+                                    <p class="description"><?php echo $notifications[$pos]['description']; ?></p>
+                                </div>
+                                <br>
+                            </li>
+                            <?php endfor; ?>
+                        <?php endif; ?>
                     </ul>
                     <!-- Pagination -->
                     <div class="pageContainer">
