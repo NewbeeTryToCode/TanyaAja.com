@@ -5,19 +5,51 @@ $judul = "Edit Profile";
 ?>
 
 <?php
-    if (isset($_POST['simpan'])) {
+    if (isset($_POST['uploadprof'])) {
         if ($_GET['hal'] == "edit") {
-            //data akan di edit
             $nama_prof = $_FILES['profilepic']['name'];
             $source = $_FILES['profilepic']['tmp_name'];
             $folder = '../CRUD/Profile/uploads/';
             $profil = mysqli_query($conn, "UPDATE users SET prof='$nama_prof' WHERE id ='$_GET[id]'");
-        move_uploaded_file($source, $folder.$nama_prof);
-          $nama_back = $_FILES['background']['name'];
-          $source = $_FILES['background']['tmp_name'];
-          $folder = '../CRUD/Profile/uploads/background/';
-          $background = mysqli_query($conn, "UPDATE users SET back = '$nama_back' WHERE id ='$_GET[id]'");
-          move_uploaded_file($source, $folder.$nama_back);
+            move_uploaded_file($source, $folder.$nama_prof);
+            if ($profil) {//Jika Edit sukses
+                echo "<script>
+                        alert('Edit data sukses!'); 
+                        document.location='profile.php';
+                    </script>";
+            }else{//Jika Edit Gagal
+                echo "<script>
+                        alert('Edit data GAGAL!! ^_^'); 
+                        document.location='profile.php';
+                    </script>";
+            }
+        }
+    }elseif (isset($_POST['uploadback'])) {
+        $nama_back = $_FILES['background']['name'];
+        $source = $_FILES['background']['tmp_name'];
+        $folder = '../CRUD/Profile/uploads/background/';
+        $background = mysqli_query($conn, "UPDATE users SET back = '$nama_back' WHERE id ='$_GET[id]'");
+        move_uploaded_file($source, $folder.$nama_back);
+        if ($background) {//Jika Edit sukses
+            echo "<script>
+                    alert('Edit data sukses!'); 
+                    document.location='edit_profile.php';
+                </script>";
+        }else{//Jika Edit Gagal
+            echo "<script>
+                    alert('Edit data GAGAL!! ^_^'); 
+                    document.location='edit_profile.php';
+                </script>";
+        }
+    }
+    
+    
+?>
+
+<?php
+    if (isset($_POST['simpan'])) {
+        if ($_GET['hal'] == "edit") {
+            //data akan di edit
           $edit = mysqli_query($conn, "UPDATE `users` SET username ='$_POST[tusername]', fname='$_POST[tfname]', email='$_POST[temail]', phone = '$_POST[tphone]', alamat ='$_POST[talamat]' WHERE id ='$_GET[id]'");
           if ($edit) {//Jika Edit sukses
             echo "<script>
@@ -118,12 +150,18 @@ $judul = "Edit Profile";
                                     <input type="file" class="custom-file-input" name="profilepic">
                                     <label class="custom-file-label" for="profilepic" aria-describedby="inputGroupFileAddon02">Choose file</label>
                                 </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="input-group-text" name="uploadprof">Upload</button>
+                                </div>
                             </div>    
                             <p class="fontform">Backround Picture</p>
                             <div class="input-group mb-3">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="background">
                                     <label class="custom-file-label" for="background" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="input-group-text" name="uploadback">Upload</button>
                                 </div>
                             </div>
                         <br><br><button type="submit" name="simpan" class="btn abu btn-primary tombol"><i class="far fa-check-circle ijo"></i>  Save</button><br>
