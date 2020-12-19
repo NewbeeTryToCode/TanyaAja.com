@@ -33,12 +33,12 @@ $judul = "Edit Profile";
         if ($background) {//Jika Edit sukses
             echo "<script>
                     alert('Edit data sukses!'); 
-                    document.location='edit_profile.php';
+                    document.location='profile.php';
                 </script>";
         }else{//Jika Edit Gagal
             echo "<script>
                     alert('Edit data GAGAL!! ^_^'); 
-                    document.location='edit_profile.php';
+                    document.location='profile.php';
                 </script>";
         }
     }
