@@ -272,7 +272,7 @@ function get_search_notif($keyword){
 function get_search_data($keyword){
 
 	global $conn;
-	$query = "SELECT question_id as id, title, description, username, name as catName, q.updated_at FROM 
+	$query = "SELECT question_id as id, title, description, username, name as catName, q.updated_at, q.user_id FROM 
 				questions q INNER JOIN categories c ON q.id = c.question_id
 				INNER JOIN users u ON q.user_id = u.id
 				WHERE
