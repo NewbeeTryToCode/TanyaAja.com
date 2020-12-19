@@ -1,7 +1,8 @@
 <?php
 include "../konek.db.php";
 session_start();
-if (isset($_POST['username']) && isset($_POST['password'])) {
+$paswd = md5($_POST['password']);
+if (isset($_POST['username']) && isset($paswd)) {
     function validate($data)
     {
         $data = trim($data);
@@ -11,7 +12,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     }
 
     $user = validate($_POST['username']);
-    $pwd = validate($_POST['password']);
+    $pwd = validate($paswd);
 
     if (empty($user) && empty($pwd)) {
         $_SESSION['errormsg'] = "username & password required";
