@@ -3,8 +3,6 @@
     max-width: 120px;
     max-height: 120px;
     border-radius: 100px;
-    z-index: 999;
-    object-fit: contain;
 }
 
 .bgContainer{
@@ -20,10 +18,6 @@
     align-items: center;
 }
 
-.pfContainer{
-    margin-top: -180px;
-}
-
 .bgContainer img{
     width: 100%; 
     height: 100%; 
@@ -37,6 +31,7 @@
 
 .background{
     position: relative;
+    border-radius: 16px;
 }
 
 .bawahback{

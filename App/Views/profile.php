@@ -50,10 +50,8 @@ $judul = "Profile";
                         <div class="parrent">
                             <div class="row justify-content-center">
                                 <div class="bgContainer">
-                                    <img src="../CRUD/Profile/uploads/background/<?=$data['back']?>" class="img-responsive img-rounded background" alt="Kander">
-                                    <div class="pfContainer">
-                                        <img class='position-absolute rounded-circle img-fluid avatar' src='../CRUD/Profile/uploads/<?=$data['prof']?>' alt='Generic placeholder image'> 
-                                    </div>
+                                    <img src="../CRUD/Profile/uploads/background/<?=$data['back']?>" class="img-responsive img-rounded background" alt="Background">
+                                    <img class='img-fluid mx-auto avatar my-5' src='../CRUD/Profile/uploads/<?=$data['prof']?>' alt='profile'>  
                                 </div>
                             </div> 
                         </div>  
