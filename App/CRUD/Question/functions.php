@@ -321,9 +321,9 @@ function get_max_id($table){
     return get_data($result)[0]["MAX(id)"];
 }
 
-function get_all($table, $sort){
+function get_all($table, $plus = ';'){
     global $conn;
-    $query = "SELECT * FROM $table ORDER BY id $sort";
+    $query = "SELECT * FROM $table $plus";
     $result = mysqli_query($conn, $query);
 
     return get_data($result);
@@ -333,7 +333,7 @@ function get_hot(){
 
 	global $conn;
     $query = "SELECT q.id, COUNT(question_id) as jumlah, q.title, q.description, q.user_id, q.updated_at, u.username
-				FROM questions q INNER JOIN likes l
+				FROM questions q INNER JOIN views l
 				ON q.id = l.question_id 
 				INNER JOIN users u
 				ON u.id = q.user_id

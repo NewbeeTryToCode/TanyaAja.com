@@ -9,7 +9,7 @@ if( isset($_GET['search']) && !empty($_GET['search']) ){
     $notifications = get_search_notif($keyword);
     $add = "&search=$keyword";
 }else{
-    $notifications = get_all("notifications", "DESC");
+    $notifications = get_all("notifications", "ORDER BY id DESC");
     $add = "";
 }
 
@@ -107,7 +107,7 @@ $judul = "Admin Notifications";
                             <!-- prev -->
 
                             <?php foreach( $pagination as $pos => $page ) :  ?>
-                                <li class="page-item"><a class="page-link abu" href="./admin_notif.php?page=<?php echo $pos + 1 . $add?>"><?php echo $pos + 1 ?></a></li>
+                                <li class="page-item"><a class="page-link abu <?php if( $curPage == $pos ) echo 'bold';?>" href="./admin_notif.php?page=<?php echo $pos + 1 . $add?>"><?php echo $pos + 1 ?></a></li>
                             <?php endforeach; ?>
 
                             <!-- next -->

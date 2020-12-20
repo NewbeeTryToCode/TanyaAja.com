@@ -10,7 +10,7 @@ if( isset($_GET['search']) && !empty($_GET['search']) ){
     $add = "&search=$keyword";
 }elseif(isset($_GET['earliest']) && !empty($_GET['earliest'])){
 
-    $questions = get_all("questions", "ASC");
+    $questions = get_all("questions", "ORDER BY updated_at ASC");
     $add = "&earliest=true";
 
 }elseif(isset($_GET['hot']) && !empty($_GET['hot'])){
@@ -24,7 +24,7 @@ elseif(isset($_GET['unanswered']) && !empty($_GET['unanswered'])){
     $add = "&unanswered=true";
 
 }else{
-    $questions = get_all("questions", "DESC");
+    $questions = get_all("questions", "ORDER BY updated_at DESC");
     $add = "";
 }
 
@@ -201,7 +201,7 @@ $judul = "Public Questions";
                             <!-- prev -->
 
                             <?php foreach( $pagination as $pos => $page ) :  ?>
-                                <li class="page-item"><a class="page-link abu" href="./public_questions.php?page=<?php echo $pos + 1 . $add?>"><?php echo $pos + 1 ?></a></li>
+                                <li class="page-item"><a class="page-link abu <?php if( $curPage == $pos ) echo 'bold';?>" href="./public_questions.php?page=<?php echo $pos + 1 . $add?>"><?php echo $pos + 1 ?></a></li>
                             <?php endforeach; ?>
 
                             <!-- next -->
